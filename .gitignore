@@ -1,0 +1,4 @@
+node_modules
+*.log
+Gruntfile.js
+.DS_Store

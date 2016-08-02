@@ -1,0 +1,61 @@
+<!-- https://logomakr.com/5BpXcP   mockups of logos-->
+
+
+
+<!DOCTYPE html>
+<html ng-app="myTimeApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>MyTime App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="vendor/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="styles/stylesheet.css">
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-animate/angular-animate.min.js"></script>
+    <script src="vendor/angular-aria/angular-aria.min.js"></script>
+    <script src="vendor/angular-messages/angular-messages.min.js"></script>
+    <script src="vendor/angular-material/angular-material.min.js"></script>
+    <script src="vendor/angular-route/angular-route.min.js"></script>
+
+    <script src="scripts/myTimeApp.module.js"></script>
+    <script src="scripts/myTimeApp.config.js"></script>
+    <script src="scripts/MainController.js"></script>
+    <base href="/" />
+</head>
+
+<body ng-controller="MainController as main">
+
+    <header layout="row">
+        <div flex-offset="10" flex="90" layout="row" layout-align="center center">
+            <img id="header-logo" src="assets/text-with-1clock-backwards.png" alt="logo" />
+        </div>
+        <div class="top-right" flex="10" layout="column">
+            <md-button class="md-raised" ng-click="main.showLogin($event)">Login</md-button>
+            <md-button class="md-primary" ng-click="main.register()">Register</md-button>
+        </div>
+    </header>
+
+
+
+
+
+
+
+
+    <!-- <md-button ng-click="main.allJobs()">all-jobs</md-button>
+<md-button ng-click="createInvoice()">create-invoice</md-button>
+<md-button ng-click="currentJob()">current-job</md-button>
+<md-button ng-click="editJob()">edit-job</md-button>
+<md-button ng-click="invoices()">invoices</md-button>
+<md-button ng-click="login()">login</md-button>
+<md-button ng-click="newJob()">new-job</md-button>
+<md-button ng-click="profile()">profile</md-button>
+<md-button ng-click="register()">register</md-button> -->
+
+
+    <div ng-view> </div>
+
+</body>
+
+</html>

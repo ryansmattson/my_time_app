@@ -1,0 +1,19 @@
+<main layout="row" layout-align="center">
+
+    <md-card class="timer-card" flex="50">
+        <md-card-title>
+            <md-card-title-text layout="row" layout-align="center">
+                <span class="timer-numbers">{{main.hours}}:{{main.minutes}}:{{main.seconds}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="center center">
+            <md-button flex="25" class="md-raised" ng-click="main.startTimer()">clock-in</md-button>
+            <md-button flex="5" class="md-raised" ng-click="main.pauseTimer()">||</md-button>
+            <md-button flex="25" class="md-raised" ng-click="main.stopTimer()">clock-out</md-button>
+        </md-card-actions>
+    </md-card>
+
+
+    <md-button ng-click="main.allJobs()">all-jobs</md-button>
+
+</main>

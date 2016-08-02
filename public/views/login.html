@@ -1,0 +1,12 @@
+<div flex="50" class="loginModal" layout="column" layout-align="center center">
+  <h2>Login</h2>
+    <md-input-container>
+        <label>Username</label>
+        <input ng-model="main.username"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="main.password"></input>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="main.loginSubmit(main.username, main.password)">submit</md-button>
+</div>

@@ -1,0 +1,45 @@
+<h2>Register<h2>
+
+<div layout="row" layout-align="center">
+
+  <div layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>First Name</label>
+        <input type="text" ng-model="main.firstName" required></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Last Name</label>
+        <input type="text" ng-model="main.lastName" required></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Email</label>
+        <input type="email" ng-model="main.email"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Phone</label>
+        <input type="tel" ng-model="main.phone"></input>
+    </md-input-container>
+  </div>
+
+
+  <div layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>Hourly Rate</label>
+        <input type="number" ng-model="main.rate"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Username</label>
+        <input ng-model="main.username" required></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="main.password" required></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Confirm Password</label>
+        <input type="password" ng-model="main.confirmPassword" required></input>
+    </md-input-container>
+  </div>
+
+</div>
+<md-button flex-align="center end" class="md-raised" ng-click="main.loginSubmit(main.username, main.password)">submit</md-button>

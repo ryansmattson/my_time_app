@@ -1,0 +1,22 @@
+/*blue color on logos 85c7fe*/
+main {
+  margin-top: 25px;
+}
+.loginModal {
+  padding: 20px;
+  border: solid 1px black;
+  min-width: 400px;
+}
+.timer-card {
+  height: 200px;
+  min-width: 400px;
+}
+.timer-numbers {
+  font-size: 6em;
+}
+.top-right {
+  margin: 10px 25px 0 0;
+}
+#header-logo {
+  width: 330px;
+}
