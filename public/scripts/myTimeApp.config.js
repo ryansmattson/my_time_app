@@ -24,8 +24,8 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
   })
   .when('/current-job', {
     templateUrl: '/views/current-job.html',
-    controller: 'CurrentController',
-    controllerAs: 'current'
+    controller: 'MainController',
+    controllerAs: 'main'
   })
   .when('/edit-job', {
     templateUrl: '/views/edit-job.html',
