@@ -17,8 +17,9 @@ angular.module('myTimeApp').controller('NewJobController', ['$http', '$location'
 	}
 
 	function handleSuccess(res) {
-		$location.path('/current-job');
+		// $location.path('/current-job');
 		console.log('Success!', res);
+		RouteFactory.currentJobRoute();
 	}
 
 	function handleFailure(res) {

@@ -67,7 +67,8 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 	}
 
 	vm.allJobs = function() {
-		$location.path('/all-jobs')
+		// $location.path('/all-jobs')
+		RouteFactory.allJobsRoute();
 	};
 
 

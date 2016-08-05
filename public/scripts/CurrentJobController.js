@@ -154,7 +154,8 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	}
 
 	vm.allJobs = function() {
-		$location.path('/all-jobs')
+		// $location.path('/all-jobs')
+		RouteFactory.allJobsRoute();
 	};
 
 

@@ -28,7 +28,7 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 
 	function handleSetAsCurrentSucces(res) {
 		console.log('Successfully set as current job', res);
-		$location.path('/current-job');
+    RouteFactory.currentJobRoute();
 	}
 
 	function handleSetAsCurrentFailure(res) {

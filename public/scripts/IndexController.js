@@ -36,7 +36,8 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	function handleLoginSuccess(res) {
 		$mdDialog.hide();
 		console.log('Success!', res);
-		$location.path('/current-job');
+		// $location.path('/current-job');
+		RouteFactory.currentJobRoute();
 	}
 
 	function handleLoginFailure(res) {
@@ -77,7 +78,8 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	//   **REGISTER**
 
 	vm.register = function() {
-		$location.path('/register');
+		// $location.path('/register');
+		RouteFactory.registerRoute();
 	};
 
 

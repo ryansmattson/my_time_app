@@ -42,7 +42,6 @@ router.put('/changeCurrentJob', function(req, res) {
       } else {
         console.log('newCallback Success');
         res.sendStatus(200);
-        // $location.path('/current-job');
       }
     });
   }
