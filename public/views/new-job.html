@@ -1,1 +1,30 @@
-New Job
+<h2>New Job<h2>
+
+<div layout="row" layout-align="center">
+
+  <div class="new-job-container" layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>Job Name:</label>
+        <input type="text" ng-model="newjob.name" required></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Hourly Rate: <span class="md-subhead"> (Overrides standard rate)</span></label>
+        <input type="number" ng-model="newjob.rate"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Bill to <span class="md-subhead"> (Company)</span>:</label>
+        <input type="text" ng-model="newjob.company"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Invoice to<span class="md-subhead"> (Individual)</span>:</label>
+        <input type="text" ng-model="newjob.individual"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Notes:</label>
+        <textarea rows="3" ng-model="newjob.notes"></textarea>
+    </md-input-container>
+  </div>
+
+</div>
+
+<md-button flex-align="center end" class="md-raised" ng-click="newjob.submitNewJob(newjob.name, newjob.rate, newjob.company, newjob.individual, newjob.notes)">Submit</md-button>

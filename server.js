@@ -8,6 +8,7 @@ var User = require('./models/user');
 var index = require('./routes/index');
 var login = require('./routes/login');
 var register = require('./routes/register');
+var newjob = require('./routes/jobs');
 
 var app = express();
 
@@ -66,7 +67,8 @@ app.use(express.static('public'));
 
 app.use('/', index);
 app.use('/register', register);
-app.use('/login', login)
+app.use('/login', login);
+app.use('/jobs', newjob);
 
 
 var server = app.listen(3000, function() {

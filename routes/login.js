@@ -3,9 +3,10 @@ var passport = require('passport');
 
 router.get('/', function(req, res){
   res.send(req.isAuthenticated());
-}); 
+});
 
 router.get('/success', function(req, res){
+  console.log(req.user);
   res.sendStatus(200);
 });
 

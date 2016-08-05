@@ -1,19 +1,23 @@
-<main layout="row" layout-align="center">
+<div class="timer-container" layout="row" layout-align="center">
 
     <md-card class="timer-card" flex="50">
         <md-card-title>
             <md-card-title-text layout="row" layout-align="center">
-                <span class="timer-numbers">{{main.hours}}:{{main.minutes}}:{{main.seconds}}</span>
+                <span class="timer-numbers">{{home.hours}}:{{home.minutes}}:{{home.seconds}}</span>
             </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="center center">
-            <md-button flex="25" class="md-raised" ng-click="main.startTimer()">clock-in</md-button>
-            <!-- <md-button flex="5" class="md-raised" ng-click="main.pauseTimer()">||</md-button> -->
-            <md-button flex="25" class="md-raised" ng-click="main.stopTimer()">clock-out</md-button>
+            <md-button flex="25" class="md-raised" ng-click="home.startTimer()">clock-in</md-button>
+            <md-button flex="25" class="md-raised" ng-click="home.stopTimer()">clock-out</md-button>
         </md-card-actions>
     </md-card>
 
+</div>
 
-    <md-button ng-click="main.allJobs()">all-jobs</md-button>
 
-</main>
+<ul ng-repeat="time in home.listOfClockedTimes">
+  <li>Date: {{time.date}}</li>
+  <li>Start Time: {{time.startTime}}</li>
+  <li>End Time: {{time.endTime}}</li>
+  <li>Total Time: {{time.totalTime}}</li>
+</ul>

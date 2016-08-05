@@ -1,1 +1,35 @@
-<h1>Success!  Current-Job</h1>
+<div class="container" layout-align="center center">
+
+  <h2>Job: {{current.currentJob[0].name}}</h2>
+  <h4>Rate: ${{current.currentJob[0].hourly_rate}}</h4>
+  <h4>Date Created: {{current.currentJob[0].date_created}}</h4>
+
+    <div class="timer-container" layout="row" layout-align="center">
+        <md-card class="timer-card" flex="50">
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="center">
+                    <span class="timer-numbers">{{current.hours}}:{{current.minutes}}:{{current.seconds}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="center center">
+                <md-button flex="25" class="md-raised" ng-click="current.startTimer()">clock-in</md-button>
+                <md-button flex="25" class="md-raised" ng-click="current.stopTimer()">clock-out</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+    <div class="tracked-time" layout-align="center">
+      <ul ng-repeat="time in current.listOfClockedTimes">
+        <li>Date: {{time.date}}</li>
+        <li>Start Time: {{time.startTime}}</li>
+        <li>End Time: {{time.endTime}}</li>
+        <li>Total Time: {{time.totalTime}}</li>
+      </ul>
+    </div>
+
+    <md-input-container class="notes" layout-align="center">
+      <label>Notes:</label>
+      <textarea rows="3">{{current.currentJob[0].notes}}</textarea>
+    </md-input-container>
+
+</div>

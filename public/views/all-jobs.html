@@ -1,1 +1,12 @@
 <h1>All Jobs</h1>
+
+<ul style="border: solid" ng-repeat="job in alljobs.allJobsList">
+  <p>Name: {{job.name}}</p>
+  <p>Rate: {{job.hourly_rate}}</p>
+  <p>Date: {{job.date_created}}</p>
+  <p>Organization: {{job.bill_organization}}</p>
+  <p>Individual: {{job.bill_individual}}</p>
+  <p>Notes: {{job.notes}}</p>
+  <md-button ng-click="alljobs.setAsCurrentJob(job.id)">Open Job</md-button>
+  <md-button>Edit Job</md-button>
+</ul>

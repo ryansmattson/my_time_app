@@ -1,11 +1,22 @@
 /*blue color on logos 85c7fe*/
-main {
+.container {
+  margin: 20px;
+}
+.timer-container {
   margin-top: 25px;
 }
 .loginModal {
   padding: 20px;
-  border: solid 1px black;
   min-width: 400px;
+}
+.navbar {
+  margin: 0 40px 20px 40px;
+}
+.navbar span {
+  font-size: 1.3em;
+}
+.new-job-container {
+  min-width: 350px;
 }
 .timer-card {
   height: 200px;

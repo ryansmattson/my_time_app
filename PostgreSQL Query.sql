@@ -18,6 +18,8 @@ hourly_rate varchar(80) not null,
 date_created varchar(80),
 bill_organization varchar(80),
 bill_individual varchar(80),
+current_job boolean,
+notes text,
 user_id integer references users
 );
 

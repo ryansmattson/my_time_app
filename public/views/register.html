@@ -5,23 +5,23 @@
   <div layout="column" layout-align="center" layout-margin>
     <md-input-container>
         <label>First Name</label>
-        <input type="text" ng-model="main.first" required></input>
+        <input type="text" ng-model="index.first" required></input>
     </md-input-container>
     <md-input-container>
         <label>Last Name</label>
-        <input type="text" ng-model="main.last" required></input>
+        <input type="text" ng-model="index.last" required></input>
     </md-input-container>
     <md-input-container>
         <label>Email</label>
-        <input type="email" ng-model="main.email"></input>
+        <input type="email" ng-model="index.email"></input>
     </md-input-container>
     <md-input-container>
         <label>Phone</label>
-        <input type="tel" ng-model="main.phone"></input>
+        <input type="tel" ng-model="index.phone"></input>
     </md-input-container>
     <md-input-container>
         <label>Address</label>
-        <input type="text" ng-model="main.address"></input>
+        <input type="text" ng-model="index.address"></input>
     </md-input-container>
   </div>
 
@@ -29,21 +29,21 @@
   <div layout="column" layout-align="center" layout-margin>
     <md-input-container>
         <label>Hourly Rate</label>
-        <input type="number" ng-model="main.rate"></input>
+        <input type="number" ng-model="index.rate"></input>
     </md-input-container>
     <md-input-container>
         <label>Username</label>
-        <input ng-model="main.username" required></input>
+        <input ng-model="index.username" required></input>
     </md-input-container>
     <md-input-container>
         <label>Password</label>
-        <input type="password" ng-model="main.password" required></input>
+        <input type="password" ng-model="index.password" required></input>
     </md-input-container>
     <md-input-container>
         <label>Confirm Password</label>
-        <input type="password" ng-model="main.confirmPassword" required></input>
+        <input type="password" ng-model="index.confirmPassword" required></input>
     </md-input-container>
   </div>
 
 </div>
-<md-button flex-align="center end" class="md-raised" ng-click="main.registerSubmit(main.first, main.last, main.username, main.password, main.email, main.phone, main.address, main.rate)">Submit</md-button>
+<md-button flex-align="center end" class="md-raised" ng-click="index.registerSubmit(index.first, index.last, index.username, index.password, index.email, index.phone, index.address, index.rate)">Submit</md-button>

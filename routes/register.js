@@ -3,7 +3,10 @@ var router = require('express').Router();
 var User = require('../models/user.js');
 
 router.post('/', function(req, res){
-  User.createUser(req.body.first_name, req.body.last_name, req.body.username, req.body.password, req.body.email, req.body.phone, req.body.address, req.body.hourly_rate, function(err){
+
+  var data = req.body
+  
+  User.createUser(data.first_name, data.last_name, data.username, data.password, data.email, data.phone, data.address, data.hourly_rate, function(err){
     if(err){
       console.log(err);
       res.sendStatus(500);

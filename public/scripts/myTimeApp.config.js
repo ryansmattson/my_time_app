@@ -8,39 +8,49 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
 
   $routeProvider
   .when('/', {
-    templateUrl: '/views/home.html',
-    controller: 'MainController',
-    controllerAs: 'main'
+    templateUrl: '/views/new-job.html',
+    controller: 'NewJobController',
+    controllerAs: 'newjob'
   })
-  .when('/alljobs', {
+  .when('/all-jobs', {
     templateUrl: '/views/all-jobs.html',
-    controller: "MainController",
-    controllerAs: "main"
-  })
-  .when('/create-invoice', {
-    templateUrl: '/views/create-invoice.html',
-    controller: 'CreateController',
-    controllerAs: 'create'
+    controller: "AllJobsController",
+    controllerAs: "alljobs"
   })
   .when('/current-job', {
     templateUrl: '/views/current-job.html',
-    controller: 'MainController',
-    controllerAs: 'main'
+    controller: 'CurrentJobController',
+    controllerAs: 'current'
   })
   .when('/edit-job', {
     templateUrl: '/views/edit-job.html',
-    controller: 'EditController',
-    controllerAs: 'edit'
+    controller: 'EditJobController',
+    controllerAs: 'editjob'
   })
   .when('/invoices', {
     templateUrl: '/views/invoices.html',
-    controller: 'InvoiceController',
-    controllerAs: 'invoice'
+    controller: 'InvoicesController',
+    controllerAs: 'invoices'
+  })
+  .when('/new-invoice', {
+    templateUrl: '/views/new-invoice.html',
+    controller: 'NewInvoiceController',
+    controllerAs: 'newinvoice'
+  })
+  .when('/new-job', {
+    templateUrl: '/views/new-job.html',
+    controller: 'NewJobController',
+    controllerAs: 'newjob'
   })
   .when('/login', {
     templateUrl: '/views/login.html',
-    controller: 'LoginController',
-    controllerAs: 'login'
+    controller: 'IndexController',
+    controllerAs: 'index'
+  })
+  .when('/login-fail', {
+    templateUrl: '/views/login-fail.html',
+    controller: 'IndexController',
+    controllerAs: 'index'
   })
   .when('/profile', {
     templateUrl: '/views/profile.html',
@@ -49,8 +59,8 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
   })
   .when('/register', {
     templateUrl: '/views/register.html',
-    controller: 'MainController',
-    controllerAs: 'main'
+    controller: 'IndexController',
+    controllerAs: 'index'
   })
 
 

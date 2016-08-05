@@ -1,7 +1,5 @@
 <!-- https://logomakr.com/5BpXcP   mockups of logos-->
 
-
-
 <!DOCTYPE html>
 <html ng-app="myTimeApp">
 
@@ -20,38 +18,47 @@
 
     <script src="scripts/myTimeApp.module.js"></script>
     <script src="scripts/myTimeApp.config.js"></script>
-    <script src="scripts/MainController.js"></script>
+
+    <script src="scripts/AllJobsController.js"></script>
+    <script src="scripts/CurrentJobController.js"></script>
+    <script src="scripts/EditJobController.js"></script>
+    <script src="scripts/HomeController.js"></script>
+    <script src="scripts/IndexController.js"></script>
+    <script src="scripts/InvoicesController.js"></script>
+    <script src="scripts/NewInvoiceController.js"></script>
+    <script src="scripts/NewJobController.js"></script>
+    <script src="scripts/ProfileController.js"></script>
+
+    <script src="scripts/RouteFactory.js"></script>
     <base href="/" />
 </head>
 
-<body ng-controller="MainController as main">
+<body ng-controller="IndexController as index">
 
     <header layout="row">
         <div flex-offset="10" flex="90" layout="row" layout-align="center center">
             <img id="header-logo" src="assets/text-with-1clock-backwards.png" alt="logo" />
         </div>
         <div class="top-right" flex="10" layout="column">
-            <md-button class="md-raised" ng-click="main.showLogin()">Login</md-button>
-            <md-button class="md-primary" ng-click="main.register()">Register</md-button>
+            <md-button class="md-raised" ng-click="index.showLogin()">Login</md-button>
+            <md-button class="md-primary" ng-click="index.register()">Register</md-button>
         </div>
     </header>
 
+    <div class="navbar" layout="row" layout-align="space-between">
+        <div layout="row" flex="60">
+          <md-button ng-click="index.currentJobRoute()"><span>current job</span></md-button>
+          <p> | </p>
+          <md-button ng-click="index.allJobsRoute()"><span>all jobs</span></md-button>
+          <p> | </p>
+          <md-button ng-click="index.invoicesRoute()">invoices</md-button>
+        </div>
+        <div layout="row" flex="40" layout-align="end">
+          <md-button ng-click="index.newJobRoute()">+job</md-button>
+          <md-button ng-click="index.newInvoiceRoute()">+invoice</md-button>
+        </div>
+    </div>
 
-
-
-
-
-
-
-    <!-- <md-button ng-click="main.allJobs()">all-jobs</md-button>
-<md-button ng-click="createInvoice()">create-invoice</md-button>
-<md-button ng-click="currentJob()">current-job</md-button>
-<md-button ng-click="editJob()">edit-job</md-button>
-<md-button ng-click="invoices()">invoices</md-button>
-<md-button ng-click="login()">login</md-button>
-<md-button ng-click="newJob()">new-job</md-button>
-<md-button ng-click="profile()">profile</md-button>
-<md-button ng-click="register()">register</md-button> -->
 
 
     <div ng-view> </div>
