@@ -10,93 +10,163 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 	vm.listOfClockedTimes = [];
 	vm.currentJob = {};
+	vm.allTimes = {};
 
 	var intervalId;
 	var isTimerRunning = false;
 	var clockIn;
 	var clockOut;
 
+
+
+	function getCurrentTime(job_id) {
+
+	}
+
+	function getAllTimes(job_id) {
+		var id = job_id;
+
+		console.log('get all times id', id);
+
+		$http.get('/times/allTimes/' + id).then(handleGetAllTimesSuccess, handleGetAllTimesFailure);
+	}
+
+	function handleGetAllTimesSuccess(res) {
+		console.log('Successfully got all times:', res);
+		vm.allTimes = res.data;
+	}
+
+	function handleGetAllTimesFailure(res) {
+		console.log('Failed to get all times', res);
+	}
+
+
+	function setClockIn(job_id, clockInTime) {
+		var sendData = {};
+		sendData.job_id = job_id;
+		sendData.clockInTime = clockInTime;
+
+		$http.post('/times/clockIn', sendData).then(handleClockInSuccess, handleClockInFailure);
+	}
+
+	function handleClockInSuccess(res) {
+		console.log('Clock in success', res);
+	}
+
+	function handleClockInFailure(res) {
+		console.log('Clock in Failure', res);
+	}
+
+
+	function setClockOut(job_id, clockOutTime) {
+		var sendData = {};
+		sendData.job_id = job_id;
+		sendData.clockOutTime = clockOutTime;
+
+		console.log('sendData', sendData);
+
+		$http.put('/times/clockOut', sendData).then(handleClockOutSuccess, handleClockOutFailure);
+	}
+
+	function handleClockOutSuccess(res) {
+		console.log('Clock out success', res);
+	}
+
+	function handleClockOutFailure(res) {
+		console.log('Clock out Failure', res);
+	}
+
+
+
+
+
 	function getCurrentJob() {
 		$http.get('/jobs/currentJob').then(handleGetCurrentSuccess, handleGetCurrentFailure);
 	}
+
 	function handleGetCurrentSuccess(res) {
 		console.log('Success!', res);
 		vm.currentJob = res.data;
+		getAllTimes(vm.currentJob[0].id);
 	}
+
 	function handleGetCurrentFailure(res) {
 		console.log('Failure!', res);
 	}
 
 
-		vm.startTimer = function() {
-			if (isTimerRunning) {
-				return
+	vm.startTimer = function(job_id) {
+		if (isTimerRunning) {
+			return
+		} else {
+			var clockInTime = new Date();
+			isTimerRunning = true;
+			intervalId = $interval(incrementSeconds, 1000);
+			// clockIn = new Date();
+			setClockIn(job_id, clockInTime);
+		}
+	}
+
+	vm.stopTimer = function(job_id) {
+		var clockOutTime = new Date();
+		$interval.cancel(intervalId);
+		vm.seconds = '00';
+		vm.minutes = '00';
+		vm.hours = '00';
+		isTimerRunning = false;
+		// clockOut = new Date();
+		setClockOut(job_id, clockOutTime);
+		console.log('clockOutTime:', clockOutTime);
+		// formatClockedHours(clockIn, clockOut);
+	}
+
+
+	function incrementSeconds() {
+		if (vm.seconds == 59) {
+			vm.seconds = addZeroToSingleDigit(0);
+			incrementMinutes();
+		} else {
+			if (vm.seconds >= 0 && vm.seconds < 9) {
+				vm.seconds++;
+				vm.seconds = addZeroToSingleDigit(vm.seconds);
 			} else {
-				isTimerRunning = true;
-				intervalId = $interval(incrementSeconds, 1000);
-				clockIn = new Date();
-				console.log('clockIn:', clockIn);
+				vm.seconds++;
 			}
 		}
-
-		vm.stopTimer = function() {
-			$interval.cancel(intervalId);
-			vm.seconds = '00';
-			vm.minutes = '00';
-			vm.hours = '00';
-			isTimerRunning = false;
-			clockOut = new Date();
-			console.log('clockOut:', clockOut);
-			formatClockedHours(clockIn, clockOut);
-		}
+	}
 
 
-		function incrementSeconds() {
-			if (vm.seconds == 59) {
-				vm.seconds = addZeroToSingleDigit(0);
-				incrementMinutes();
+	function incrementMinutes() {
+		if (vm.minutes == 59) {
+			vm.minutes = addZeroToSingleDigit(0);
+			incrementHours();
+		} else {
+			if (vm.minutes >= 0 && vm.minutes < 9) {
+				vm.minutes++;
+				vm.minutes = addZeroToSingleDigit(vm.minutes);
 			} else {
-				if (vm.seconds >= 0 && vm.seconds < 9) {
-					vm.seconds++;
-					vm.seconds = addZeroToSingleDigit(vm.seconds);
-				} else {
-					vm.seconds++;
-				}
+				vm.minutes++;
 			}
 		}
+	}
 
-
-		function incrementMinutes() {
-			if (vm.minutes == 59) {
-				vm.minutes = addZeroToSingleDigit(0);
-				incrementHours();
-			} else {
-				if (vm.minutes >= 0 && vm.minutes < 9) {
-					vm.minutes++;
-					vm.minutes = addZeroToSingleDigit(vm.minutes);
-				} else {
-					vm.minutes++;
-				}
-			}
+	function incrementHours() {
+		if (vm.hours >= 0 && vm.hours < 9) {
+			vm.hours++;
+			vm.hours = addZeroToSingleDigit(vm.hours);
+		} else {
+			vm.hours++;
 		}
+	}
 
-		function incrementHours() {
-			if (vm.hours >= 0 && vm.hours < 9) {
-				vm.hours++;
-				vm.hours = addZeroToSingleDigit(vm.hours);
-			} else {
-				vm.hours++;
-			}
+
+	function addZeroToSingleDigit(number) {
+		if (number == 0) {
+			return '00'
+		} else {
+			return '0' + number;
 		}
-
-
-		function addZeroToSingleDigit(number) {
-			if (number == 0) {
-				return '00'
-			} else {
-				return '0' + number;
-			}
-		}
+	}
 
 
 	function clockedTime(date, startTime, endTime, totalTime) {
@@ -121,7 +191,6 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 		var tempTotalTime = msToTime((clockOut - clockIn));
 
 		vm.listOfClockedTimes.push(new clockedTime(tempDate, tempStartTime, tempEndTime, tempTotalTime));
-
 	}
 
 	function isAmPm(hours) {
@@ -159,7 +228,7 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	};
 
 
-getCurrentJob();
+	getCurrentJob();
 
 
 }]);

@@ -27,5 +27,5 @@ CREATE TABLE times (
 id serial primary key,
 clock_in varchar(80),
 clock_out varchar(80),
-job_id integer references users
+job_id integer references jobs
 );

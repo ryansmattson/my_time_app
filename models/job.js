@@ -87,6 +87,7 @@ function setCurrentJobTrue(user_id, job_id, callback){
 	});
 }
 
+
 function findCurrentJob(user_id, callback){
 	pool.connect(function(err, client, done){
 		if(err){
