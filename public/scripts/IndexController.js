@@ -1,6 +1,6 @@
 //This controller handles Login and Registration
 
-angular.module('myTimeApp').controller('IndexController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', function($http, $location, $interval, $mdDialog, RouteFactory) {
+angular.module('myTimeApp').controller('IndexController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory) {
 
 	var vm = this;
 

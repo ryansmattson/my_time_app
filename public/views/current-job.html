@@ -3,7 +3,8 @@
   <h2>Job: {{current.currentJob[0].name}}</h2>
   <h4>Rate: ${{current.currentJob[0].hourly_rate}}</h4>
   <h4>Date Created: {{current.currentJob[0].date_created}}</h4>
-  <h4>All Times: {{current.allTimes}}</h4>
+  <h4>Total Hours: {{current.totalJobTime}}</h4>
+
 
     <div class="timer-container" layout="row" layout-align="center">
         <md-card class="timer-card" flex="50">
@@ -22,9 +23,9 @@
     <div class="tracked-time" layout-align="center">
       <ul ng-repeat="time in current.allTimes">
         <li>Date: {{time.date}}</li>
-        <li>Start Time: {{time.clock_in}}</li>
-        <li>End Time: {{time.clock_out}}</li>
-        <li>Total Time: {{time.totalTime}}</li>
+        <li>Start Time: {{time.startTime}}</li>
+        <li>End Time: {{time.endTime}}</li>
+        <li>Elapsed Time: {{time.elapsedTime}}</li>
       </ul>
     </div>
 
