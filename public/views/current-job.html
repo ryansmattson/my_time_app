@@ -1,9 +1,9 @@
 <div class="container" layout-align="center center">
 
-  <h2>Job: {{current.currentJob[0].name}}</h2>
-  <h4>Rate: ${{current.currentJob[0].hourly_rate}}</h4>
-  <h4>Date Created: {{current.currentJob[0].date_created}}</h4>
-  <h4>Total Hours: {{current.totalJobTime}}</h4>
+  <h2>Job: {{current.currentJob.name}}</h2>
+  <h4>Rate: ${{current.currentJob.hourly_rate}}</h4>
+  <h4>Date Created: {{current.currentJob.date_created}}</h4>
+  <h4>Total Hours: {{current.totalJobTime.pretty}}</h4>
 
 
     <div class="timer-container" layout="row" layout-align="center">
@@ -21,13 +21,18 @@
     </div>
 
     <div class="tracked-time" layout-align="center">
-      <ul ng-repeat="time in current.allTimes">
-        <li>Date: {{time.date}}</li>
-        <li>Start Time: {{time.startTime}}</li>
-        <li>End Time: {{time.endTime}}</li>
-        <li>Elapsed Time: {{time.elapsedTime}}</li>
+      <ul ng-repeat="time in current.currentJobTimes">
+        <li>Job ID: {{time.jobId}}</li>
+        <li>ID: {{time.id}}</li>
+        <li>Date: {{time.datePretty}}</li>
+        <li>Start Time: {{time.startPretty}}</li>
+        <li>End Time: {{time.endPretty}}</li>
+        <li>Elapsed Time: {{time.elapsedTimePretty}}</li>
       </ul>
     </div>
+
+<!-- <p>{{current.currentJobTimes}}</p> -->
+
 
     <md-input-container class="notes" layout-align="center">
       <label>Notes:</label>

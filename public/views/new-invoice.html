@@ -1,1 +1,57 @@
-<h1>Create Invoice</h1>
+<h2>Create Invoice<h2>
+
+<div layout="row" layout-align="center">
+
+  <div layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>Invoice #</label>
+        <input type="text" ng-model="index.invoiceNumber"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Description:</label>
+        <input type="text" ng-model="index.description"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Invoice Date:</label>
+        <input type="date" ng-model="index.invoiceDate"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Due Date:</label>
+        <input type="date" ng-model="index.dueDate"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>From:</label>
+        <input type="text" ng-model="index.from"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Bill to:</label>
+        <input type="text" ng-model="index.billTo"></input>
+    </md-input-container>
+  </div>
+
+
+  <div layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>Invoice to:</label>
+        <input type="text" ng-model="index.invoiceTo"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Hours:</label>
+        <input type="number" ng-model="index.hours"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Balance Due:</label>
+        <input type="number" ng-model="index.balance"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Additional Notes:</label>
+        <input type="password" ng-model="index.confirmPassword"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Terms and Conditions:</label>
+        <input type="text" ng-model="index.terms"></input>
+    </md-input-container>
+  </div>
+
+</div>
+<md-button flex-align="center end" class="md-raised" ng-click="index.registerSubmit(index.first, index.last, index.username, index.password, index.email, index.phone, index.address, index.rate)">Submit</md-button>

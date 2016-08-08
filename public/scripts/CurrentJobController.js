@@ -1,14 +1,17 @@
-angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory) {
+angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', 'TimesFactory', 'JobFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory, TimesFactory, JobFactory) {
 
 	var vm = this;
+
+	//Needs to be object, only changing keys triggers update
+	vm.currentJobTimes = TimesFactory.currentJobTimes;
+	vm.currentJob = JobFactory.currentJob;
+	vm.totalJobTime = TimesFactory.totalJobTime;
 
 	vm.seconds = '00';
 	vm.minutes = '00';
 	vm.hours = '00';
 
 	vm.allTimes = [];
-	vm.currentJob = {};
-	vm.totalJobTime = 0;
 
 	var intervalId;
 	var isTimerRunning = false;
@@ -17,41 +20,8 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 
 
-//Constructor for a clocked time.
-	function clockedTime(date, startTime, endTime, elapsedTime) {
-		this.date = date,
-			this.startTime = startTime,
-			this.endTime = endTime,
-			this.elapsedTime = elapsedTime
-	}
 
-//Retrieves all clocked times for the current job and pushes them into the allTimes array.  Also adds/formats totalJobTime.
-	function getAllTimes(job_id) {
-		var id = job_id;
 
-		$http.get('/times/allTimes/' + id).then(handleGetAllTimesSuccess, handleGetAllTimesFailure);
-	}
-
-	function handleGetAllTimesSuccess(res) {
-		var timesData = res.data;
-		var tempTotalJobTime = 0;
-
-		for (var i = timesData.length - 1; i >= 0; i--) {
-			var date = DateTimeFactory.formatForDate(timesData[i].clock_in);
-			var startTime = DateTimeFactory.formatForTime(timesData[i].clock_in);
-			var endTime = DateTimeFactory.formatForTime(timesData[i].clock_out);
-			var elapsedTimeMillis = DateTimeFactory.calcElapsedTime(timesData[i].clock_in, timesData[i].clock_out);
-			var elapsedTimeFormatted = DateTimeFactory.msToTime(elapsedTimeMillis);
-
-			tempTotalJobTime += elapsedTimeMillis;
-			vm.allTimes.push(new clockedTime(date, startTime, endTime, elapsedTimeFormatted));
-		}
-
-		vm.totalJobTime = DateTimeFactory.msToTime(tempTotalJobTime);
-	}
-	function handleGetAllTimesFailure(res) {
-		console.log('Failed to get all times', res);
-	}
 
 
 //Sends the clock in time to the database and creates a new entry.
@@ -87,20 +57,6 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 		console.log('Clock out Failure', res);
 	}
 
-
-//Retrieves the current job and all its details and adds them to the currentJob object.
-	function getCurrentJob() {
-		$http.get('/jobs/currentJob').then(handleGetCurrentSuccess, handleGetCurrentFailure);
-	}
-
-	function handleGetCurrentSuccess(res) {
-		console.log('Success!', res);
-		vm.currentJob = res.data;
-		getAllTimes(vm.currentJob[0].id);
-	}
-	function handleGetCurrentFailure(res) {
-		console.log('Failure!', res);
-	}
 
 
 //Starts timer on "Clock In" button click and updates the database with setClockIn()
@@ -171,5 +127,5 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	}
 
 
-	getCurrentJob();
+	JobFactory.getCurrentJob();
 }]);
