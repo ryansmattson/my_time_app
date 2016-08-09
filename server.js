@@ -10,6 +10,7 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var newjob = require('./routes/jobs');
 var times = require('./routes/times');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -71,6 +72,7 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/jobs', newjob);
 app.use('/times', times);
+app.use('/users', users);
 
 
 var server = app.listen(3000, function() {

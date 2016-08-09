@@ -1,4 +1,4 @@
-angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', 'TimesFactory', 'JobFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory, TimesFactory, JobFactory) {
+angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', 'TimesFactory', 'JobFactory', 'UserFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory, TimesFactory, JobFactory, UserFactory) {
 
 	var vm = this;
 
@@ -6,6 +6,7 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
 	vm.currentJob = JobFactory.currentJob;
 	vm.totalJobTime = TimesFactory.totalJobTime;
+	vm.currentUser = UserFactory.currentUser;
 
 	vm.seconds = '00';
 	vm.minutes = '00';

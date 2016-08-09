@@ -1,6 +1,6 @@
 //This controller handles Login and Registration
 
-angular.module('myTimeApp').controller('IndexController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory) {
+angular.module('myTimeApp').controller('IndexController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'DateTimeFactory', 'JobFactory', 'UserFactory', function($http, $location, $interval, $mdDialog, RouteFactory, DateTimeFactory, JobFactory, UserFactory) {
 
 	var vm = this;
 
@@ -37,6 +37,8 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 		$mdDialog.hide();
 		console.log('Success!', res);
 		// $location.path('/current-job');
+		UserFactory.getCurrentUser();
+		JobFactory.getCurrentJob();
 		RouteFactory.currentJobRoute();
 	}
 

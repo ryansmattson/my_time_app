@@ -90,6 +90,14 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 	}
 
 
+	function msToHours(duration){
+		var seconds = duration / 1000;
+		var minutes = seconds / 60;
+		var hours = (minutes / 60).toFixed(2);
+		return parseFloat(hours);
+	}
+
+
 
 
 	return {
@@ -99,6 +107,7 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 		formatForDate: formatForDate,
 		formatForTime: formatForTime,
 		isAmPm: isAmPm,
+		msToHours: msToHours,
 		msToTime: msToTime
 	}
 })

@@ -1,7 +1,11 @@
 angular.module('myTimeApp').factory('TimesFactory', function($location, $http, DateTimeFactory) {
 
 
-	var currentJobTimes = {};
+	var currentJobTimes = {
+		timesArray: []
+	};
+
+	var totalJobBalance = {};
 	var totalJobTime = {};
 
 	var id;
@@ -35,18 +39,18 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 	function getAllTimes(job_id) {
 		var id = job_id;
 		console.log('getAllTimes id:', id);
-		//Put call below in Service (any) and call from here
-
-		//Variables should be set above in the following format:
-
-		//vm.currentJob = JobService.currentJob
 
 		$http.get('/times/allTimes/' + id).then(handleGetAllTimesSuccess, handleGetAllTimesFailure);
 	}
 
 	function handleGetAllTimesSuccess(res) {
 		var timesData = res.data;
+		// var rate = userOrJobRate();
+
 		buildCurrentTimesObject(timesData);
+
+		// totalJobBalance.total = calcTotalJobBalance(totalJobTime.hours, rate);
+		// console.log('totalJobBalance.total:', totalJobBalance.total);
 	}
 
 	function handleGetAllTimesFailure(res) {
@@ -56,57 +60,58 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 
 	function buildCurrentTimesObject(timesData) {
 		var tempTotalJobTime = 0;
-		// currentJobTimes = {};
+		currentJobTimes.timesArray = [];
 		console.log('timesData:', timesData);
 
-		for (var i = timesData.length - 1; i >= 0; i--) {
+		if (timesData.length > 0) {
+			for (var i = 0; i < timesData.length; i++) {
 
-			var forTime = 'time_' + i;
-
-			// console.log('currentJobTimes:', currentJobTimes);
-			// console.log('currentJobTimes.forTime:', currentJobTimes.forTime);
-
-			// currentJobTimes.forTime.id = timesData[i].id;
-			// // currentJobTimes['time_' + i];
-
-			// currentJobTimes.forTime.jobId = timesData[i].job_id;
-			// currentJobTimes.forTime.date = timesData[i].clock_in;
-			// currentJobTimes.forTime.startTime = timesData[i].clock_in;
-			// currentJobTimes.forTime.endTime = timesData[i].clock_out;
-			// currentJobTimes.forTime.elapsedTimeMillis = DateTimeFactory.calcElapsedTime(timesData[i].clock_in, timesData[i].clock_out);
-			// currentJobTimes.forTime.datePretty = timesData[i].DateTimeFactory.formatForDate(timesData[i].clock_in);
-			// currentJobTimes.forTime.startPretty = DateTimeFactory.formatForTime(timesData[i].clock_in);
-			// currentJobTimes.forTime.endPretty = DateTimeFactory.formatForTime(timesData[i].clock_out);
-			// currentJobTimes.forTime.elapsedTimePretty = DateTimeFactory.msToTime(elapsedTimeMillis);
+				id = timesData[i].id;
+				jobId = timesData[i].job_id;
+				date = timesData[i].clock_in;
+				startTime = timesData[i].clock_in;
+				endTime = timesData[i].clock_out;
+				elapsedTimeMillis = DateTimeFactory.calcElapsedTime(timesData[i].clock_in, timesData[i].clock_out);
+				datePretty = DateTimeFactory.formatForDate(timesData[i].clock_in);
+				startPretty = DateTimeFactory.formatForTime(timesData[i].clock_in);
+				endPretty = DateTimeFactory.formatForTime(timesData[i].clock_out);
+				elapsedTimePretty = DateTimeFactory.msToTime(elapsedTimeMillis);
 
 
-			id = timesData[i].id;
-			jobId = timesData[i].job_id;
-			date = timesData[i].clock_in;
-			startTime = timesData[i].clock_in;
-			endTime = timesData[i].clock_out;
-			elapsedTimeMillis = DateTimeFactory.calcElapsedTime(timesData[i].clock_in, timesData[i].clock_out);
-			datePretty = DateTimeFactory.formatForDate(timesData[i].clock_in);
-			startPretty = DateTimeFactory.formatForTime(timesData[i].clock_in);
-			endPretty = DateTimeFactory.formatForTime(timesData[i].clock_out);
-			elapsedTimePretty = DateTimeFactory.msToTime(elapsedTimeMillis);
+				tempTotalJobTime += elapsedTimeMillis;
 
+				currentJobTimes.timesArray.unshift(new clockedTime(id, jobId, date, startTime, endTime, elapsedTimeMillis, datePretty, startPretty, endPretty, elapsedTimePretty));
 
-			tempTotalJobTime += elapsedTimeMillis;
-			currentJobTimes['time_' + i] = (new clockedTime(id, jobId, date, startTime, endTime, elapsedTimeMillis, datePretty, startPretty, endPretty, elapsedTimePretty));
-			console.log('currentJobTimes: ', currentJobTimes);
+				console.log('currentJobTimes.timesArray: ', currentJobTimes.timesArray);
+			}
+
+			totalJobTime.millis = tempTotalJobTime;
+      totalJobTime.hours = DateTimeFactory.msToHours(tempTotalJobTime);
+			totalJobTime.pretty = DateTimeFactory.msToTime(tempTotalJobTime);
 		}
-
-		totalJobTime.millis = tempTotalJobTime;
-		totalJobTime.pretty = DateTimeFactory.msToTime(tempTotalJobTime);
 	}
+
+	// function userOrJobRate() {
+	// 	if (JobFactory.currentJob.hourly_rate !== null) {
+	// 		return JobFactory.currentJob.hourly_rate;
+	// 	} else {
+	// 		return UserFactory.currentUser.hourly_rate;
+	// 	}
+	// }
+	//
+	// function calcTotalJobBalance(time, rate) {
+	// 	var total = (time * rate).toFixed(2);
+	//
+	// 	return parseFloat(total);
+	// }
 
 
 
 
 	return {
 		currentJobTimes: currentJobTimes,
+		getAllTimes: getAllTimes,
 		totalJobTime: totalJobTime,
-		getAllTimes: getAllTimes
+		totalJobBalance : totalJobBalance
 	}
 })

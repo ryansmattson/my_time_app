@@ -14,7 +14,7 @@ hourly_rate varchar(80)
 CREATE TABLE jobs (
 id serial primary key,
 name varchar(80) not null,
-hourly_rate varchar(80) not null,
+hourly_rate varchar(80),
 date_created varchar(80),
 bill_organization varchar(80),
 bill_individual varchar(80),

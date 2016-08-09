@@ -1,4 +1,4 @@
-angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', function($http, $location, $interval, $mdDialog, RouteFactory) {
+angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', function($http, $location, $interval, $mdDialog, RouteFactory, JobFactory, TimesFactory) {
 
 	var vm = this;
 
@@ -22,12 +22,13 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 	vm.setAsCurrentJob = function(job_id) {
 		var sendData = {};
 		sendData.job_id = job_id;
-
 		$http.put('/jobs/changeCurrentJob', sendData).then(handleSetAsCurrentSucces, handleSetAsCurrentFailure);
 	}
 
 	function handleSetAsCurrentSucces(res) {
 		console.log('Successfully set as current job', res);
+		// JobFactory.getCurrentJob();
+		// TimesFactory.getAllTimes();
     RouteFactory.currentJobRoute();
 	}
 

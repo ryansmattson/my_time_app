@@ -2,8 +2,9 @@
 
   <h2>Job: {{current.currentJob.name}}</h2>
   <h4>Rate: ${{current.currentJob.hourly_rate}}</h4>
-  <h4>Date Created: {{current.currentJob.date_created}}</h4>
+  <h4>Date Created: {{current.currentJob.date_createdPretty}}</h4>
   <h4>Total Hours: {{current.totalJobTime.pretty}}</h4>
+  <h4>Current User: {{current.currentUser}}</h4>
 
 
     <div class="timer-container" layout="row" layout-align="center">
@@ -14,14 +15,14 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-actions layout="row" layout-align="center center">
-                <md-button flex="25" class="md-raised" ng-click="current.startTimer(current.currentJob[0].id)">clock-in</md-button>
-                <md-button flex="25" class="md-raised" ng-click="current.stopTimer(current.currentJob[0].id)">clock-out</md-button>
+                <md-button flex="25" class="md-raised" ng-click="current.startTimer(current.currentJob.id)">clock-in</md-button>
+                <md-button flex="25" class="md-raised" ng-click="current.stopTimer(current.currentJob.id)">clock-out</md-button>
             </md-card-actions>
         </md-card>
     </div>
 
     <div class="tracked-time" layout-align="center">
-      <ul ng-repeat="time in current.currentJobTimes">
+      <ul ng-repeat="time in current.currentJobTimes.timesArray">
         <li>Job ID: {{time.jobId}}</li>
         <li>ID: {{time.id}}</li>
         <li>Date: {{time.datePretty}}</li>
