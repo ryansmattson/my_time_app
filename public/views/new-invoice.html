@@ -2,14 +2,25 @@
 
 <div layout="row" layout-align="center">
 
+
+
   <div layout="column" layout-align="center" layout-margin>
+    <label>Invoice #</label>
     <md-input-container>
-        <label>Invoice #</label>
-        <input type="text" ng-model="newinvoice.invoiceNumber"></input>
+        <p class="md-subhead" ng-show="newinvoice.editableField.invoice" ng-model="newinvoice.invoiceNumber"></p>
+        <input type="text" ng-hide="newinvoice.editableField.invoice"></input>
     </md-input-container>
+    <label class="md-subhead">Description:</label>
     <md-input-container>
-        <label>Description:</label>
-        <input type="text" ng-model="newinvoice.currentJob.name"></input>
+      <div ng-show="newinvoice.editableField.description">
+        <span ng-model="newinvoice.invoice.description"></span>
+        <md-button ng-click="newinvoice.turnOnEditField('description')">edit</md-button>
+      </div>
+
+      <div ng-hide="newinvoice.editableField.description">
+        <input type="text" ng-model="newinvoice.invoice.description"></input>
+        <md-button ng-click="newinvoice.submitEditField('description', newinvoice.invoice.description)">done</md-button>
+      </div>
     </md-input-container>
         <!-- <label>Invoice Date:</label> -->
         <label class="md-subhead">Invoice Date:</label>
@@ -69,4 +80,4 @@
   </div>
 
 </div>
-<md-button flex-align="center end" class="md-raised" ng-click="newinvoice.registerSubmit(newinvoice.first, newinvoice.last, newinvoice.username, newinvoice.password, newinvoice.email, newinvoice.phone, newinvoice.address, newinvoice.rate)">Submit</md-button>
+<md-button flex-align="center end" class="md-raised" ng-click="newinvoice.createInvoice(newinvoice.invoiceNumber, newinvoice.last, newinvoice.username, newinvoice.password, newinvoice.email, newinvoice.phone, newinvoice.address, newinvoice.rate)">Create Invoice</md-button>

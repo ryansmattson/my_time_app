@@ -3,6 +3,30 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	var vm = this;
 	vm.totalJobBalance;
 	vm.finalRate;
+	vm.editableField = {
+		invoice: false,
+		description: false,
+		invoiceDate: false,
+		dueDate: false,
+		from: false,
+		address: false,
+		phone: false,
+		email: false,
+		billTo: false,
+		invoieTo: false,
+		hours: false,
+		rate: false,
+		balanceDue: false,
+		notes: false,
+		terms: false
+	}
+
+	vm.invoice = {};
+	//terms
+	//invoiceDate
+	//dueDate
+
+
 
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
 	// id
@@ -41,6 +65,35 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	// address
 	// hourly_rate
 
+	function buildInvoice() {
+		vm.invoice.description = vm.currentJob.name;
+		vm.invoice.from = vm.currentUser.full_name;
+		vm.invoice.address = vm.currentUser.address;
+		vm.invoice.phone = vm.currentUser.phone;
+		vm.invoice.email = vm.currentUser.email;
+		vm.invoice.billTo = vm.currentJob.bill_organization
+		vm.invoice.invoiceTo = vm.currentJob.bill_individual
+		vm.invoice.hours = vm.totalJobTime.hours
+		vm.invoice.rate = vm.finalRate;
+		vm.invoice.balanceDue = vm.totalJobBalance;
+		vm.invoice.notes = vm.currentJob.notes;
+	}
+
+
+	vm.turnOnEditField = function(fieldName) {
+		vm.editableField[fieldName] = false;
+
+		console.log('editFieldOn field:', fieldName);
+	}
+
+	vm.submitEditField = function(fieldName, input) {
+		vm.editableField[fieldName] = true;
+		vm.invoice[fieldName] = input;
+		console.log('editFieldOff fieldName:', fieldName);
+		console.log('editFieldOff input:', input);
+		console.log('editableField:', vm.editableField);
+
+	}
 
 	function calcFinalRate() {
 		if (vm.currentJob.hourly_rate !== null) {
