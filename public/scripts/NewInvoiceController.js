@@ -1,30 +1,18 @@
-angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'TimesFactory', 'JobFactory', 'UserFactory', function($http, $location, $interval, $mdDialog, RouteFactory, TimesFactory, JobFactory, UserFactory) {
+angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'TimesFactory', 'JobFactory', 'UserFactory', 'DateTimeFactory', 'InvoiceFactory', function($http, $location, $interval, $mdDialog, RouteFactory, TimesFactory, JobFactory, UserFactory, DateTimeFactory, InvoiceFactory) {
 
 	var vm = this;
 	vm.totalJobBalance;
 	vm.finalRate;
 	vm.editableField = {
-		invoice: false,
-		description: false,
-		invoiceDate: false,
-		dueDate: false,
-		from: false,
-		address: false,
-		phone: false,
-		email: false,
-		billTo: false,
-		invoieTo: false,
-		hours: false,
-		rate: false,
-		balanceDue: false,
-		notes: false,
-		terms: false
+		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoieTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
+	}
+
+	vm.createNewInvoice = function(invoice){
+		InvoiceFactory.createNewInvoice(invoice);
 	}
 
 	vm.invoice = {};
 	//terms
-	//invoiceDate
-	//dueDate
 
 
 
@@ -65,18 +53,27 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	// address
 	// hourly_rate
 
+
+vm.createAndPrintNewInvoice = function(invoice){
+	vm.createNewInvoice(invoice);
+	RouteFactory.printInvoiceRoute();
+}
+
+
 	function buildInvoice() {
-		vm.invoice.description = vm.currentJob.name;
-		vm.invoice.from = vm.currentUser.full_name;
 		vm.invoice.address = vm.currentUser.address;
-		vm.invoice.phone = vm.currentUser.phone;
-		vm.invoice.email = vm.currentUser.email;
-		vm.invoice.billTo = vm.currentJob.bill_organization
-		vm.invoice.invoiceTo = vm.currentJob.bill_individual
-		vm.invoice.hours = vm.totalJobTime.hours
-		vm.invoice.rate = vm.finalRate;
 		vm.invoice.balanceDue = vm.totalJobBalance;
+		vm.invoice.billTo = vm.currentJob.bill_organization
+		vm.invoice.description = vm.currentJob.name;
+		// vm.invoice.dueDate =
+		vm.invoice.email = vm.currentUser.email;
+		vm.invoice.from = vm.currentUser.full_name;
+		vm.invoice.hours = vm.totalJobTime.hours
+		vm.invoice.invoiceDate = new Date();
+		vm.invoice.invoiceTo = vm.currentJob.bill_individual
 		vm.invoice.notes = vm.currentJob.notes;
+		vm.invoice.phone = vm.currentUser.phone;
+		vm.invoice.rate = vm.finalRate;
 	}
 
 
@@ -92,8 +89,16 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 		console.log('editFieldOff fieldName:', fieldName);
 		console.log('editFieldOff input:', input);
 		console.log('editableField:', vm.editableField);
-
 	}
+
+	// vm.turnOffAllEditFields = function() {
+	// 	console.log('turnOffAllEditFields');
+	// 	for (field in vm.editableField) {
+	// 		if (field == true) {
+	// 			field = false;
+	// 		}
+	// 	}
+	// }
 
 	function calcFinalRate() {
 		if (vm.currentJob.hourly_rate !== null) {
@@ -102,7 +107,6 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 			vm.finalRate = vm.currentUser.hourly_rate;
 		}
 	}
-
 
 
 	function calcTotalJobBalance() {
@@ -117,5 +121,5 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 
 	calcFinalRate();
 	calcTotalJobBalance();
-
+	buildInvoice();
 }]);

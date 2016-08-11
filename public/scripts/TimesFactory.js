@@ -38,7 +38,6 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 	//Retrieves all clocked times for the current job and pushes them into the allTimes array.  Also adds/formats totalJobTime.
 	function getAllTimes(job_id) {
 		var id = job_id;
-		console.log('getAllTimes id:', id);
 
 		$http.get('/times/allTimes/' + id).then(handleGetAllTimesSuccess, handleGetAllTimesFailure);
 	}
@@ -61,7 +60,6 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 	function buildCurrentTimesObject(timesData) {
 		var tempTotalJobTime = 0;
 		currentJobTimes.timesArray = [];
-		console.log('timesData:', timesData);
 
 		if (timesData.length > 0) {
 			for (var i = 0; i < timesData.length; i++) {
@@ -81,8 +79,6 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 				tempTotalJobTime += elapsedTimeMillis;
 
 				currentJobTimes.timesArray.unshift(new clockedTime(id, jobId, date, startTime, endTime, elapsedTimeMillis, datePretty, startPretty, endPretty, elapsedTimePretty));
-
-				console.log('currentJobTimes.timesArray: ', currentJobTimes.timesArray);
 			}
 
 			totalJobTime.millis = tempTotalJobTime;

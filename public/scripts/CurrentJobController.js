@@ -19,7 +19,9 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	var clockIn;
 	var clockOut;
 
-
+	vm.newInvoiceRoute = function() {
+		RouteFactory.newInvoiceRoute();
+	}
 
 
 

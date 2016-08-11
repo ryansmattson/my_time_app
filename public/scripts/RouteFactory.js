@@ -8,6 +8,10 @@ function currentJobRoute(){
   $location.path('/current-job');
 }
 
+function editInvoiceRoute(){
+  $location.path('/edit-invoice');
+}
+
 function editJobRoute(){
   $location.path('/edit-job');
 }
@@ -28,6 +32,10 @@ function newJobRoute(){
   $location.path('/new-job');
 }
 
+function printInvoiceRoute(){
+  $location.path('/print-invoice');
+}
+
 function profileRoute(){
   $location.path('/profile');
 }
@@ -40,10 +48,12 @@ function registerRoute(){
     allJobsRoute : allJobsRoute,
     currentJobRoute : currentJobRoute,
     editJobRoute : editJobRoute,
+    editInvoiceRoute : editInvoiceRoute,
     homeRoute : homeRoute,
     invoicesRoute : invoicesRoute,
     newInvoiceRoute : newInvoiceRoute,
     newJobRoute : newJobRoute,
+    printInvoiceRoute : printInvoiceRoute,
     profileRoute : profileRoute,
     registerRoute : registerRoute
   }

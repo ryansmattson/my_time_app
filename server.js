@@ -11,6 +11,7 @@ var register = require('./routes/register');
 var newjob = require('./routes/jobs');
 var times = require('./routes/times');
 var users = require('./routes/users');
+var invoices = require('./routes/invoices');
 
 var app = express();
 
@@ -73,6 +74,8 @@ app.use('/login', login);
 app.use('/jobs', newjob);
 app.use('/times', times);
 app.use('/users', users);
+app.use('/invoices', invoices);
+
 
 
 var server = app.listen(3000, function() {

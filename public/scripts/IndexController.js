@@ -13,9 +13,6 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	vm.invoicesRoute = function() {
 		RouteFactory.invoicesRoute();
 	}
-	vm.newInvoiceRoute = function() {
-		RouteFactory.newInvoiceRoute();
-	}
 	vm.newJobRoute = function() {
 		RouteFactory.newJobRoute();
 	}

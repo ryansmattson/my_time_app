@@ -29,3 +29,22 @@ clock_in varchar(80),
 clock_out varchar(80),
 job_id integer references jobs
 );
+
+CREATE TABLE invoices (
+id serial primary key,
+address varchar(80),
+balance_due varchar(80),
+bill_to varchar(80),
+description varchar(80),
+due_date varchar(80),
+email varchar(80),
+from_name varchar(80),
+invoice_number varchar(80),
+invoice_date varchar(80),
+invoice_to varchar(80),
+notes varchar(80),
+phone varchar(80),
+rate varchar(80),
+terms varchar(80),
+user_id integer references users
+);

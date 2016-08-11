@@ -1,10 +1,12 @@
 <div class="container" layout-align="center center">
 
-  <h2>Job: {{current.currentJob.name}}</h2>
-  <h4>Rate: ${{current.currentJob.hourly_rate}}</h4>
-  <h4>Date Created: {{current.currentJob.date_createdPretty}}</h4>
-  <h4>Total Hours: {{current.totalJobTime.pretty}}</h4>
-  <h4>Current User: {{current.currentUser}}</h4>
+    <md-button ng-click="current.newInvoiceRoute()">+invoice</md-button>
+
+    <h2>Job: {{current.currentJob.name}}</h2>
+    <h4>Rate: ${{current.currentJob.hourly_rate}}</h4>
+    <h4>Date Created: {{current.currentJob.date_createdPretty}}</h4>
+    <h4>Total Hours: {{current.totalJobTime.pretty}}</h4>
+    <h4>Current User: {{current.currentUser}}</h4>
 
 
     <div class="timer-container" layout="row" layout-align="center">
@@ -22,22 +24,22 @@
     </div>
 
     <div class="tracked-time" layout-align="center">
-      <ul ng-repeat="time in current.currentJobTimes.timesArray">
-        <li>Job ID: {{time.jobId}}</li>
-        <li>ID: {{time.id}}</li>
-        <li>Date: {{time.datePretty}}</li>
-        <li>Start Time: {{time.startPretty}}</li>
-        <li>End Time: {{time.endPretty}}</li>
-        <li>Elapsed Time: {{time.elapsedTimePretty}}</li>
-      </ul>
+        <ul ng-repeat="time in current.currentJobTimes.timesArray">
+            <li>Job ID: {{time.jobId}}</li>
+            <li>ID: {{time.id}}</li>
+            <li>Date: {{time.datePretty}}</li>
+            <li>Start Time: {{time.startPretty}}</li>
+            <li>End Time: {{time.endPretty}}</li>
+            <li>Elapsed Time: {{time.elapsedTimePretty}}</li>
+        </ul>
     </div>
 
-<!-- <p>{{current.currentJobTimes}}</p> -->
+    <!-- <p>{{current.currentJobTimes}}</p> -->
 
 
     <md-input-container class="notes" layout-align="center">
-      <label>Notes:</label>
-      <textarea rows="3">{{current.currentJob[0].notes}}</textarea>
+        <label>Notes:</label>
+        <textarea rows="3">{{current.currentJob[0].notes}}</textarea>
     </md-input-container>
 
 </div>

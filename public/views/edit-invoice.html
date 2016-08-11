@@ -1,0 +1,87 @@
+<h2>Edit Invoice<h2>
+
+<div layout="row" layout-align="center">
+
+
+
+  <div layout="column" layout-align="center" layout-margin>
+    <label>Invoice #</label>
+    <md-input-container>
+        <p class="invoice-form-data" ng-show="editinvoice.editableField.invoice" ng-model="editinvoice.invoiceNumber"></p>
+        <input type="text" ng-hide="editinvoice.editableField.invoice"></input>
+    </md-input-container>
+
+    <label class="md-subhead">Description:</label>
+    <md-input-container>
+      <div ng-show="editinvoice.editableField.description">
+        <p class="invoice-form-data">{{editinvoice.invoice.description}}</p>
+        <md-button ng-click="editinvoice.turnOnEditField('description')">edit</md-button>
+      </div>
+
+      <div ng-hide="editinvoice.editableField.description">
+        <input type="text" ng-model="editinvoice.invoice.description"></input>
+        <md-button ng-click="editinvoice.submitEditField('description', editinvoice.invoice.description)">done</md-button>
+      </div>
+
+    </md-input-container>
+        <!-- <label>Invoice Date:</label> -->
+        <label class="md-subhead">Invoice Date:</label>
+        <md-datepicker ng-model="editinvoice.invoice.invoiceDate" md-placeholder="Invoice Date:"></md-datepicker>
+        <!-- <input type="date" ng-model="editinvoice.invoiceDate"></input> -->
+        <!-- <label>Due Date:</label> -->
+        <label class="md-subhead">Due Date:</label>
+        <md-datepicker ng-model="editinvoice.invoice.dueDate" md-placeholder="Due Date:"></md-datepicker>
+    <md-input-container>
+        <label>From:</label>
+        <input type="text" ng-model="editinvoice.invoice.full_name"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Address:</label>
+        <input type="text" ng-model="editinvoice.invoice.address"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Phone:</label>
+        <input type="text" ng-model="editinvoice.invoice.phone"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Email:</label>
+        <input type="text" ng-model="editinvoice.invoice.email"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Bill to:</label>
+        <input type="text" ng-model="editinvoice.invoice.bill_to"></input>
+    </md-input-container>
+  </div>
+
+
+  <div layout="column" layout-align="center" layout-margin>
+    <md-input-container>
+        <label>Invoice to:</label>
+        <input type="text" ng-model="editinvoice.invoice.invoice_to"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Hours:</label>
+        <input type="number" ng-model="editinvoice.invoice.hours"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Rate:</label>
+        <input type="text" ng-model="editinvoice.invoice.finalRate"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Balance Due:</label>
+        <input type="text" ng-model="editinvoice.invoice.balance_due"></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Additional Notes:</label>
+        <textarea type="text" ng-model="editinvoice.invoice.notes"></textarea>
+    </md-input-container>
+    <md-input-container>
+        <label>Terms and Conditions:</label>
+        <textarea type="text" ng-model="editinvoice.invoice.terms"></textarea>
+    </md-input-container>
+  </div>
+
+</div>
+
+<md-button flex-align="center end" class="md-raised" ng-click="editinvoice.saveInvoice(editinvoice.invoice)">Save</md-button>
+<md-button flex-align="center end" class="md-raised" ng-click="editinvoice.saveAndPrintInvoice(editinvoice.invoice)">Print</md-button>

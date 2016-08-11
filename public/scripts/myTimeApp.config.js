@@ -22,6 +22,11 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
     controller: 'CurrentJobController',
     controllerAs: 'current'
   })
+  .when('/edit-invoice', {
+    templateUrl: '/views/edit-invoice.html',
+    controller: 'EditInvoiceController',
+    controllerAs: 'editinvoice'
+  })
   .when('/edit-job', {
     templateUrl: '/views/edit-job.html',
     controller: 'EditJobController',
@@ -31,6 +36,16 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
     templateUrl: '/views/invoices.html',
     controller: 'InvoicesController',
     controllerAs: 'invoices'
+  })
+  .when('/login', {
+    templateUrl: '/views/login.html',
+    controller: 'IndexController',
+    controllerAs: 'index'
+  })
+  .when('/login-fail', {
+    templateUrl: '/views/login-fail.html',
+    controller: 'IndexController',
+    controllerAs: 'index'
   })
   .when('/new-invoice', {
     templateUrl: '/views/new-invoice.html',
@@ -42,15 +57,10 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
     controller: 'NewJobController',
     controllerAs: 'newjob'
   })
-  .when('/login', {
-    templateUrl: '/views/login.html',
-    controller: 'IndexController',
-    controllerAs: 'index'
-  })
-  .when('/login-fail', {
-    templateUrl: '/views/login-fail.html',
-    controller: 'IndexController',
-    controllerAs: 'index'
+  .when('/print-invoice', {
+    templateUrl: '/views/print-invoice.html',
+    controller: 'PrintInvoiceController',
+    controllerAs: 'print'
   })
   .when('/profile', {
     templateUrl: '/views/profile.html',
