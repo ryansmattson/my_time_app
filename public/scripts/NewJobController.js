@@ -26,4 +26,5 @@ angular.module('myTimeApp').controller('NewJobController', ['$http', '$location'
 		console.log('Failure!', res);
 	}
 
+	RouteFactory.changeCurrentTab('currentJob');
 }]);

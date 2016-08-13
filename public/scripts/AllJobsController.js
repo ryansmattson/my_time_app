@@ -39,5 +39,6 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 
 
 	getAllJobs();
+	RouteFactory.changeCurrentTab('allJobs');
 
 }]);

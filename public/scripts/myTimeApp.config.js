@@ -8,9 +8,9 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
 
   $routeProvider
   .when('/', {
-    templateUrl: '/views/new-job.html',
-    controller: 'NewJobController',
-    controllerAs: 'newjob'
+    templateUrl: '/views/home.html',
+    controller: 'HomeController',
+    controllerAs: 'home'
   })
   .when('/all-jobs', {
     templateUrl: '/views/all-jobs.html',

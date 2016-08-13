@@ -2,6 +2,11 @@ angular.module('myTimeApp').factory('UserFactory', function($location, $http, Ti
 
   var currentUser = {};
 
+  function clearUser(){
+    console.log('Trying to clear user');
+    currentUser = {something: null};
+    console.log('currentUser after clear:', currentUser);
+  };
 
   //Retrieves the current job and all its details and adds them to the currentJob object.
     function getCurrentUser() {
@@ -36,6 +41,7 @@ angular.module('myTimeApp').factory('UserFactory', function($location, $http, Ti
 
 	return {
 		getCurrentUser : getCurrentUser,
+    clearUser: clearUser,
     currentUser : currentUser
 	}
 })

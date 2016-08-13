@@ -2,8 +2,8 @@
 .container {
   margin: 20px;
 }
-.timer-container {
-  margin-top: 25px;
+.current-tab {
+  font-weight: bold;
 }
 .loginModal {
   padding: 20px;
@@ -14,6 +14,7 @@
 }
 .navbar span {
   font-size: 1.3em;
+  margin: 0 20px;
 }
 .new-job-container {
   min-width: 350px;
@@ -21,6 +22,9 @@
 .timer-card {
   height: 200px;
   min-width: 400px;
+}
+.timer-container {
+  margin-top: 25px;
 }
 .timer-numbers {
   font-size: 6em;

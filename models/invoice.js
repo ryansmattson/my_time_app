@@ -30,6 +30,27 @@ function createInvoice(address, balance_due, bill_to, description, due_date, ema
 	});
 }
 
+function updateInvoice(id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms, callback) {
+	pool.connect(function(err, client, done) {
+		if (err) {
+			done();
+			return callback(err);
+		}
+
+		client.query('UPDATE invoices SET (id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms) ' +
+			'= ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) WHERE id = $1;', [id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms],
+			function(err, result) {
+				if (err) {
+					done();
+					return callback(err);
+				}
+
+				callback(null);
+				done();
+			});
+	});
+}
+
 function deleteInvoice(id, callback){
 	pool.connect(function(err, client, done){
 		if(err){
@@ -92,5 +113,6 @@ function findInvoiceById(id, callback){
 module.exports = {
   createInvoice : createInvoice,
 	findAllUserInvoices : findAllUserInvoices,
-	findInvoiceById : findInvoiceById
+	findInvoiceById : findInvoiceById,
+	updateInvoice: updateInvoice
 };

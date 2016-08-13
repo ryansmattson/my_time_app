@@ -2,11 +2,12 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 	var vm = this;
 
+
 	//Needs to be object, only changing keys triggers update
+	vm.currentUser = UserFactory.currentUser;
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
 	vm.currentJob = JobFactory.currentJob;
 	vm.totalJobTime = TimesFactory.totalJobTime;
-	vm.currentUser = UserFactory.currentUser;
 
 	vm.seconds = '00';
 	vm.minutes = '00';
@@ -131,4 +132,5 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 
 	JobFactory.getCurrentJob();
+	RouteFactory.changeCurrentTab('currentJob');
 }]);

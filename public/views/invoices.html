@@ -1,37 +1,24 @@
-<h1>Invoices</h1>
+<div class="container" layout="row" layout-align="center start">
 
-<ul style="border: solid" ng-repeat="invoice in invoices.allInvoicesList">
-  <p>Invoice # {{invoice.invoice_number}}</p>
-
-  <p>Description: {{invoice.description}}</p>
-
-  <p>Invoice Date: {{invoice.invoice_date}}</p>
-
-  <p>Due Date: {{invoice.due_date}}</p>
-
-  <p>From: {{invoice.from_name}}</p>
-
-  <p>Address: {{invoice.address}}</p>
-
-  <p>Phone: {{invoice.phone}}</p>
-
-  <p>Email: {{invoice.email}}</p>
-
-  <p>Bill to: {{invoice.bill_to}}</p>
-
-  <p>Invoice to: {{invoice.invoice_to}}</p>
-
-  <p>Hours: {{invoice.hours}}</p>
-
-  <p>Rate: {{invoice.rate}}</p>
-
-  <p>Balance Due: {{invoice.balance_due}}</p>
-
-  <p>Additional Notes: {{invoice.notes}}</p>
-
-  <p>Terms and Conditions: {{invoice.terms}}</p>
-
-  <!-- <md-button ng-click="invoices.setAsCurrentJob(invoices.id)">Open Job</md-button> -->
-  <md-button ng-click="invoices.getAndEditInvoice(invoice.id)">open</md-button>
-  <!-- <md-button ng-click="invoices.printInvoice(invoice.id)">print</md-button> -->
-</ul>
+    <div class="form md-whiteframe-z2" layout="column" flex="70">
+        <md-toolbar class="md-warn">
+            <h2 class="md-toolbar-tools">
+      <span>Invoices</span>
+    </h2>
+        </md-toolbar>
+        <md-content>
+            <md-list layout-margin>
+                <md-list-item class="md-3-line" ng-repeat="invoice in invoices.allInvoicesList">
+                    <div class="md-list-item-text" layout-padding>
+                        <h3>{{invoice.description}}</h3>
+                        <h4>Date: {{invoice.invoice_date}}</h4>
+                        <p>Hours: {{invoice.hours}}</p>
+                        <p>Balance Due: ${{invoice.balance_due}}</p>
+                    </div>
+                    <md-button class="md-secondary" ng-click="invoices.getAndEditInvoice(invoice.id)">Open</md-button>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+</div>

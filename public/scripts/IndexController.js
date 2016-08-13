@@ -4,6 +4,11 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 
 	var vm = this;
 
+	vm.currentTab = RouteFactory.currentTab;
+
+
+	vm.currentUser = UserFactory.currentUser;
+
 	vm.allJobsRoute = function() {
 		RouteFactory.allJobsRoute();
 	}
@@ -16,8 +21,33 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	vm.newJobRoute = function() {
 		RouteFactory.newJobRoute();
 	}
+	vm.profileRoute = function(){
+		RouteFactory.profileRoute();
+	}
+	vm.homeRoute = function() {
+		console.log('clicked cancel');
+		RouteFactory.homeRoute();
+	}
 
 
+//look at current user from user factory and make sure it's not null.
+
+
+vm.logout = function(){
+	$http.get('/logout').then(handleLogoutSucess, handleLogoutFailure);
+}
+function handleLogoutSucess(res){
+	console.log('Logout successful:', res);
+	console.log('UserFactory.currentUser before reset: ', UserFactory.currentUser);
+	UserFactory.currentUser = {};
+	vm.currentUser = UserFactory.currentUser;
+	RouteFactory.homeRoute();
+	console.log('UserFactory.currentUser after reset: ', UserFactory.currentUser);
+	console.log('vm.currentUser after reset: ', vm.currentUser);
+}
+function handleLogoutFailure(res){
+	console.log('Logout unsuccessful:', res);
+}
 
 
 	//   **LOGIN**
@@ -32,11 +62,13 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 
 	function handleLoginSuccess(res) {
 		$mdDialog.hide();
+
 		console.log('Success!', res);
 		// $location.path('/current-job');
 		UserFactory.getCurrentUser();
 		JobFactory.getCurrentJob();
 		RouteFactory.currentJobRoute();
+		vm.currentUser = UserFactory.currentUser;
 	}
 
 	function handleLoginFailure(res) {

@@ -4,7 +4,7 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	vm.totalJobBalance;
 	vm.finalRate;
 	vm.editableField = {
-		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoieTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
+		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoiceTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
 	}
 
 	vm.createNewInvoice = function(invoice){
@@ -122,4 +122,6 @@ vm.createAndPrintNewInvoice = function(invoice){
 	calcFinalRate();
 	calcTotalJobBalance();
 	buildInvoice();
+	RouteFactory.changeCurrentTab('invoices');
+
 }]);

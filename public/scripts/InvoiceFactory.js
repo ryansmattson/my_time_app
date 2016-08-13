@@ -20,6 +20,20 @@ angular.module('myTimeApp').factory('InvoiceFactory', function($location, $http,
 
 
 
+	function updateInvoice(invoice) {
+		$http.put('/invoices/updateInvoice', invoice).then(handleGetInvoiceSucces, handleGetInvoiceFailure);
+	}
+
+	function handleGetInvoiceSucces(res) {
+		console.log('Successfully updated invoice', res);
+	}
+
+	function handleGetInvoiceFailure(res) {
+		console.log('Failed to udpdate invoice', res);
+	}
+
+
+
 	function getAndEditInvoice(id) {
 		$http.get('/invoices/getInvoice/' + id).then(handleGetAndEditSucces, handleGetAndEditFailure);
 	}
@@ -67,6 +81,7 @@ angular.module('myTimeApp').factory('InvoiceFactory', function($location, $http,
 		createNewInvoice: createNewInvoice,
 		currentInvoice: currentInvoice,
 		getAndEditInvoice: getAndEditInvoice,
-		getInvoice: getInvoice
+		getInvoice: getInvoice,
+		updateInvoice: updateInvoice
 	}
 })

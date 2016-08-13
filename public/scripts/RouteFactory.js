@@ -1,60 +1,76 @@
-angular.module('myTimeApp').factory('RouteFactory', function($location){
+angular.module('myTimeApp').factory('RouteFactory', function($location) {
 
-function allJobsRoute(){
-  $location.path('/all-jobs');
+var currentTab = {
+  currentJob : '',
+	allJobs : '',
+	invoices : ''
+};
+
+function changeCurrentTab(tab){
+  currentTab.currentJob = '';
+  currentTab.allJobs = '';
+  currentTab.invoices = '';
+
+  currentTab[tab] = 'current-tab';
 }
 
-function currentJobRoute(){
-  $location.path('/current-job');
-}
+	function allJobsRoute() {
+		$location.path('/all-jobs');
+	}
 
-function editInvoiceRoute(){
-  $location.path('/edit-invoice');
-}
+	function currentJobRoute() {
+		$location.path('/current-job');
+	}
 
-function editJobRoute(){
-  $location.path('/edit-job');
-}
+	function editInvoiceRoute() {
+		$location.path('/edit-invoice');
+	}
 
-function homeRoute(){
-  $location.path('/home');
-}
+	function editJobRoute() {
+		$location.path('/edit-job');
+	}
 
-function invoicesRoute(){
-  $location.path('/invoices');
-}
+	function homeRoute() {
+		$location.path('/');
+	}
 
-function newInvoiceRoute(){
-  $location.path('/new-invoice');
-}
+	function invoicesRoute() {
+		$location.path('/invoices');
+	}
 
-function newJobRoute(){
-  $location.path('/new-job');
-}
+	function newInvoiceRoute() {
+		$location.path('/new-invoice');
+	}
 
-function printInvoiceRoute(){
-  $location.path('/print-invoice');
-}
+	function newJobRoute() {
+		$location.path('/new-job');
+	}
 
-function profileRoute(){
-  $location.path('/profile');
-}
+	function printInvoiceRoute() {
+		$location.path('/print-invoice');
+	}
 
-function registerRoute(){
-  $location.path('/register');
-}
+	function profileRoute() {
+		$location.path('/profile');
+	}
 
-  return {
-    allJobsRoute : allJobsRoute,
-    currentJobRoute : currentJobRoute,
-    editJobRoute : editJobRoute,
-    editInvoiceRoute : editInvoiceRoute,
-    homeRoute : homeRoute,
-    invoicesRoute : invoicesRoute,
-    newInvoiceRoute : newInvoiceRoute,
-    newJobRoute : newJobRoute,
-    printInvoiceRoute : printInvoiceRoute,
-    profileRoute : profileRoute,
-    registerRoute : registerRoute
-  }
+	function registerRoute() {
+		$location.path('/register');
+	}
+
+	return {
+		allJobsRoute: allJobsRoute,
+    changeCurrentTab: changeCurrentTab,
+		currentJobRoute: currentJobRoute,
+    currentTab: currentTab,
+		editJobRoute: editJobRoute,
+		editInvoiceRoute: editInvoiceRoute,
+		homeRoute: homeRoute,
+		invoicesRoute: invoicesRoute,
+		newInvoiceRoute: newInvoiceRoute,
+		newJobRoute: newJobRoute,
+		printInvoiceRoute: printInvoiceRoute,
+		profileRoute: profileRoute,
+		registerRoute: registerRoute
+	}
 })

@@ -54,5 +54,7 @@ angular.module('myTimeApp').controller('InvoicesController', ['$http', '$locatio
 
 
 	getAllInvoices();
+	RouteFactory.changeCurrentTab('invoices');
+
 
 }]);

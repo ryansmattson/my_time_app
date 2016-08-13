@@ -12,6 +12,7 @@ var newjob = require('./routes/jobs');
 var times = require('./routes/times');
 var users = require('./routes/users');
 var invoices = require('./routes/invoices');
+var path = require('path');
 
 var app = express();
 
@@ -68,15 +69,35 @@ passport.deserializeUser(function(id, done) {
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+var checkAuth = function(req, res, next){
+	if (req.isAuthenticated()) {
+	 	next();
+	} else {
+		res.sendStatus(401);
+	}
+};
+
+app.get('/logout', function(req, res){
+  req.logout();
+	// res.redirect('/');
+	res.sendFile(path.join(__dirname, './public/views/index.html'));
+});
+
+
 app.use('/', index);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/jobs', newjob);
-app.use('/times', times);
-app.use('/users', users);
-app.use('/invoices', invoices);
+
+app.use('/jobs', checkAuth, newjob);
+app.use('/times', checkAuth, times);
+app.use('/users', checkAuth, users);
+app.use('/invoices', checkAuth, invoices);
 
 
+
+app.use('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, './public/views/index.html'));
+});
 
 var server = app.listen(3000, function() {
 	var port = server.address().port;

@@ -7,15 +7,25 @@ angular.module('myTimeApp').controller('EditInvoiceController', ['$http', '$loca
 	// vm.totalJobBalance;
 	// vm.finalRate;
 	vm.editableField = {
-		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoieTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
+		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoiceTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
 	}
 
 	vm.createNewInvoice = function(invoice){
 		InvoiceFactory.createNewInvoice(invoice);
 	}
 
+  vm.updateInvoice = function(invoice){
+    console.log('invoice:', invoice);
+    InvoiceFactory.updateInvoice(invoice);
+  }
+
   vm.saveAndPrintInvoice = function(){
   }
+
+	vm.invoicesRoute = function(){
+		RouteFactory.invoicesRoute();
+	}
+
   //
 	// vm.invoice = {};
 	// //terms
@@ -127,4 +137,7 @@ angular.module('myTimeApp').controller('EditInvoiceController', ['$http', '$loca
 	// calcFinalRate();
 	// calcTotalJobBalance();
 	// buildInvoice();
+
+	RouteFactory.changeCurrentTab('invoices');
+
 }]);
