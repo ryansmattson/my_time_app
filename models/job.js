@@ -107,10 +107,29 @@ function findCurrentJob(user_id, callback){
 }
 
 
+function deleteJob(id, callback){
+	pool.connect(function(err, client, done){
+		if(err){
+			done();
+			return callback(err);
+		}
+
+		client.query('DELETE FROM jobs WHERE id = $1;', [id], function(err, result){
+			if(err){
+				done();
+				return callback(err);
+			}
+			callback(null);
+			done();
+		});
+	});
+}
+
 module.exports = {
-  createJob : createJob,
-	findAllUserJobs : findAllUserJobs,
-	findCurrentJob : findCurrentJob,
-	setCurrentJobTrue : setCurrentJobTrue,
-	setCurrentJobFalse : setCurrentJobFalse
+  createJob: createJob,
+	deleteJob: deleteJob,
+	findAllUserJobs: findAllUserJobs,
+	findCurrentJob: findCurrentJob,
+	setCurrentJobTrue: setCurrentJobTrue,
+	setCurrentJobFalse: setCurrentJobFalse
 };

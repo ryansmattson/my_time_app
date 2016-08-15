@@ -41,31 +41,34 @@
 </head>
 
 <body ng-controller="IndexController as index">
+    <div id="full-header">
+        <header layout="row">
+            <div flex-offset="10" flex="90" layout="row" layout-align="center center">
+                <img id="header-logo" src="assets/text-with-1clock-backwards.png" alt="logo" />
+            </div>
+            <div ng-hide="index.currentUser.id" class="top-right" flex="10" layout="column">
+                <md-button class="button md-raised" ng-click="index.showLogin()">Login</md-button>
+                <md-button class="button md-warn" ng-click="index.register()">Register</md-button>
+            </div>
+            <div ng-show="index.currentUser.id" class="top-right" flex="10" layout="column">
+                <md-button class="button md-raised" ng-click="index.logout()">Logout</md-button>
+                <md-button class="button" ng-click="index.profileRoute()">Profile</md-button>
+            </div>
+        </header>
 
-    <header layout="row">
-        <div flex-offset="10" flex="90" layout="row" layout-align="center center">
-            <img id="header-logo" src="assets/text-with-1clock-backwards.png" alt="logo" />
-        </div>
-        <div ng-hide="index.currentUser.id" class="top-right" flex="10" layout="column">
-            <md-button class="md-raised" ng-click="index.showLogin()">Login</md-button>
-            <md-button class="md-primary" ng-click="index.register()">Register</md-button>
-        </div>
-        <div ng-show="index.currentUser.id" class="top-right" flex="10" layout="column">
-        <md-button class="md-raised" ng-click="index.logout()">Logout</md-button>
-        <md-button class="md-primary" ng-click="index.profileRoute()">Profile</md-button>
-      </div>
-    </header>
-
-    <div ng-show="index.currentUser.id"  class="navbar" layout="row" layout-align="space-between">
-        <div layout="row" flex="60">
-          <md-button class="{{index.currentTab.currentJob}}" ng-click="index.currentJobRoute()"><span>current job</span></md-button>
-          <p> | </p>
-          <md-button class="{{index.currentTab.allJobs}}" ng-click="index.allJobsRoute()"><span>all jobs</span></md-button>
-          <p> | </p>
-          <md-button class="{{index.currentTab.invoices}}" ng-click="index.invoicesRoute()">invoices</md-button>
-        </div>
-        <div layout="row" flex="40" layout-align="end">
-          <md-button ng-click="index.newJobRoute()">+job</md-button>
+        <div ng-show="index.currentUser.id" class="navbar" layout="row" layout-align="space-between">
+            <div layout="row" flex="75">
+                <md-button class="button md-raised md-primary md-hue-3" ng-click="index.newJobRoute()">+job</md-button>
+                <p> | </p>
+                <md-button class="button {{index.currentTab.currentJob}}" ng-click="index.currentJobRoute()"><span>current job</span></md-button>
+                <p> | </p>
+                <md-button class="button {{index.currentTab.allJobs}}" ng-click="index.allJobsRoute()"><span>all jobs</span></md-button>
+                <p> | </p>
+                <md-button class="button {{index.currentTab.invoices}}" ng-click="index.invoicesRoute()">invoices</md-button>
+            </div>
+            <!-- <div layout="row" flex="40" layout-align="end">
+                <md-button class="button md-raised md-primary md-hue-1" ng-click="index.newJobRoute()">+job</md-button>
+            </div> -->
         </div>
     </div>
 

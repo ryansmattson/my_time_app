@@ -1,45 +1,112 @@
-<div class="container" layout-align="center center">
+<div class="container" layout-gt-sm="row" layout-align="center">
 
-    <md-button ng-click="current.newInvoiceRoute()">+invoice</md-button>
 
+    <!-- <div flex="25">
     <h2>Job: {{current.currentJob.name}}</h2>
     <h4>Rate: ${{current.currentJob.hourly_rate}}</h4>
     <h4>Date Created: {{current.currentJob.date_createdPretty}}</h4>
     <h4>Total Hours: {{current.totalJobTime.pretty}}</h4>
-    <h4>Current User: {{current.currentUser}}</h4>
-
-
-    <div class="timer-container" layout="row" layout-align="center">
-        <md-card class="timer-card" flex="50">
-            <md-card-title>
-                <md-card-title-text layout="row" layout-align="center">
-                    <span class="timer-numbers">{{current.hours}}:{{current.minutes}}:{{current.seconds}}</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="center center">
-                <md-button flex="25" class="md-raised" ng-click="current.startTimer(current.currentJob.id)">clock-in</md-button>
-                <md-button flex="25" class="md-raised" ng-click="current.stopTimer(current.currentJob.id)">clock-out</md-button>
-            </md-card-actions>
-        </md-card>
-    </div>
-
-    <div class="tracked-time" layout-align="center">
-        <ul ng-repeat="time in current.currentJobTimes.timesArray">
-            <li>Job ID: {{time.jobId}}</li>
-            <li>ID: {{time.id}}</li>
-            <li>Date: {{time.datePretty}}</li>
-            <li>Start Time: {{time.startPretty}}</li>
-            <li>End Time: {{time.endPretty}}</li>
-            <li>Elapsed Time: {{time.elapsedTimePretty}}</li>
-        </ul>
-    </div>
-
-    <!-- <p>{{current.currentJobTimes}}</p> -->
-
 
     <md-input-container class="notes" layout-align="center">
         <label>Notes:</label>
         <textarea rows="3">{{current.currentJob[0].notes}}</textarea>
     </md-input-container>
+  </div> -->
+
+    <md-content flex="30">
+        <md-card class="md-primary">
+            <md-toolbar class="toolbar md-warn" style="min-height:10px" layout="row" layout-align="space-between center">
+                <h2 class="md-toolbar-tools">{{current.currentJob.name}}</h2>
+                <md-button class="button invoice-button md-raised" flex="30" ng-click="current.newInvoiceRoute()">+invoice</md-button>
+            </md-toolbar>
+            <div layout="column" layout-align="start start">
+                <md-list flex>
+                    <md-list-item class="md-3-line" layout="column">
+                        <div layout-padding class="md-list-item-text" layout="column">
+                            <!-- <h3>Job: {{current.currentJob.name}}</h3> -->
+                            <p>Rate: ${{current.currentJob.hourly_rate}}</p>
+                            <p>Date Created: {{current.currentJob.date_createdPretty}}</p>
+                            <p>Total Time: {{current.totalJobTime.pretty}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-card>
+    </md-content>
+
+
+    <!-- <div class="timer-container" layout="row" layout-align="center" flex="45"> -->
+    <div class="timer-card" flex="45">
+      <!-- <md-card> -->
+        <md-card-title>
+            <md-card-title-text layout="row" layout-align="center">
+                <span class="timer-numbers">{{current.hours}}:{{current.minutes}}:{{current.seconds}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="center center">
+            <md-button flex="25" class="" ng-click="current.startTimer(current.currentJob.id)">clock-in</md-button>
+            <md-button flex="25" class="" ng-click="current.stopTimer(current.currentJob.id)">clock-out</md-button>
+        </md-card-actions>
+      <!-- </md-card> -->
+    </div>
+
+    <!-- </div> -->
+
+
+    <md-content flex="30">
+        <md-card class="md-primary">
+            <md-toolbar class="toolbar md-warn" layout="row" layout-align="space-between">
+                <h2 class="md-toolbar-tools">Clocked Times</h2>
+                <!-- <md-button class="button md-raised md-warn md-hue-1" flex="25" ng-click="current.deleteTimes()">Delete</md-button> -->
+            </md-toolbar>
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-repeat="time in current.currentJobTimes.timesArray">
+                    <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ time.datePretty }}</h3>
+                        <h4>Total: {{ time.elapsedTimePretty }}</h4>
+                        <p>{{ time.startPretty }} --> {{ time.endPretty }}</p>
+                    </div>
+                    <md-button class="button md-secondary md-warn md-hue-2" ng-click="current.deleteTime(time.id, $event)">Delete</md-button>
+                    <!-- <md-checkbox ng-model="time.id"></md-checkbox> -->
+                    <md-divider ng-if="!$last"></md-divider>
+
+                </md-list-item>
+            </md-list>
+        </md-card>
+    </md-content>
+
+
+
+    <!-- <div ng-repeat="time in current.currentJobTimes.timesArray">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+            <md-toolbar class="md-primary">
+                <span class="md-headline">Date: {{ time.datePretty }}</span>
+            </md-toolbar>
+            <md-card-title-text>
+                <span class="md-subhead">Length: {{ time.elapsedTimePretty }}</span>
+            </md-card-title-text>
+            <md-card-content>
+                <p>Start Time: {{ time.startPretty }}</p>
+                <p>End Time: {{ time.endPretty }}</p>
+            </md-card-content>
+        </md-card>
+    </div> -->
+
+
+    <!--
+    <div class="tracked-time" layout-align="center">
+        <ul ng-repeat="time in current.currentJobTimes.timesArray">
+            <li>Date: {{time.datePretty}}</li>
+            <li>Start Time: {{time.startPretty}}</li>
+            <li>End Time: {{time.endPretty}}</li>
+            <li>Total: {{time.elapsedTimePretty}}</li>
+        </ul>
+    </div> -->
+
+    <!-- <p>{{current.currentJobTimes}}</p> -->
+
+
+
 
 </div>

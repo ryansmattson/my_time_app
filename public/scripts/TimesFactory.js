@@ -80,11 +80,21 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 
 				currentJobTimes.timesArray.unshift(new clockedTime(id, jobId, date, startTime, endTime, elapsedTimeMillis, datePretty, startPretty, endPretty, elapsedTimePretty));
 			}
-
-			totalJobTime.millis = tempTotalJobTime;
-      totalJobTime.hours = DateTimeFactory.msToHours(tempTotalJobTime);
-			totalJobTime.pretty = DateTimeFactory.msToTime(tempTotalJobTime);
+				totalJobTime.millis = tempTotalJobTime;
+				totalJobTime.hours = DateTimeFactory.msToHours(tempTotalJobTime);
+				totalJobTime.pretty = DateTimeFactory.msToTime(tempTotalJobTime);
 		}
+	}
+
+
+	function deleteTime(id){
+		$http.delete('/times/deleteTime/' + id).then(handleDeleteSuccess, handleDeleteFailure);
+	}
+	function handleDeleteSuccess(res){
+		console.log('Successfully deleted time.', res);
+	}
+	function handleDeleteFailure(res){
+		console.log('Could not deleted time.', res);
 	}
 
 	// function userOrJobRate() {
@@ -106,6 +116,7 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 
 	return {
 		currentJobTimes: currentJobTimes,
+		deleteTime: deleteTime,
 		getAllTimes: getAllTimes,
 		totalJobTime: totalJobTime,
 		totalJobBalance : totalJobBalance

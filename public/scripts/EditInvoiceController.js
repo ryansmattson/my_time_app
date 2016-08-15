@@ -4,19 +4,43 @@ angular.module('myTimeApp').controller('EditInvoiceController', ['$http', '$loca
 
   vm.invoice = InvoiceFactory.currentInvoice.data;
 
+	vm.invoiceDate = new Date(vm.invoice.invoice_date);
+	vm.dueDate = new Date(vm.invoice.due_date);
+
+	vm.invoiceDatePretty = DateTimeFactory.formatForDate(vm.invoice.invoice_date);
+	vm.dueDatePretty = DateTimeFactory.formatForDate(vm.invoice.due_date);
+
+
 	// vm.totalJobBalance;
 	// vm.finalRate;
+
 	vm.editableField = {
-		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoiceTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
+		invoiceDate: false,
+		dueDate: false
 	}
 
-	vm.createNewInvoice = function(invoice){
-		InvoiceFactory.createNewInvoice(invoice);
+	vm.editField = function(field){
+		// vm.invoiceDate = new Date(vm.invoiceDatePretty);
+		// vm.dueDate = new Date(vm.dueDatePretty);
+		vm.editableField[field] = true;
 	}
+
+	vm.doneEditing = function(field){
+		vm.invoiceDatePretty = DateTimeFactory.formatForDate(vm.invoiceDate);
+		vm.dueDatePretty = DateTimeFactory.formatForDate(vm.dueDate);
+		vm.editableField[field] = false;
+	}
+
+	// vm.createNewInvoice = function(invoice){
+	// 	InvoiceFactory.createNewInvoice(invoice);
+	// }
 
   vm.updateInvoice = function(invoice){
-    console.log('invoice:', invoice);
-    InvoiceFactory.updateInvoice(invoice);
+		invoice.invoice_date = vm.invoiceDate;
+		invoice.due_date = vm.dueDate;
+		console.log('vm.invoice:', vm.invoice);
+		InvoiceFactory.updateInvoice(invoice);
+
   }
 
   vm.saveAndPrintInvoice = function(){
@@ -24,6 +48,10 @@ angular.module('myTimeApp').controller('EditInvoiceController', ['$http', '$loca
 
 	vm.invoicesRoute = function(){
 		RouteFactory.invoicesRoute();
+	}
+
+	vm.print = function(){
+		print();
 	}
 
   //
@@ -92,11 +120,7 @@ angular.module('myTimeApp').controller('EditInvoiceController', ['$http', '$loca
 	// }
 
 
-	vm.turnOnEditField = function(fieldName) {
-		vm.editableField[fieldName] = false;
 
-		console.log('editFieldOn field:', fieldName);
-	}
   //
 	// vm.submitEditField = function(fieldName, input) {
 	// 	vm.editableField[fieldName] = true;

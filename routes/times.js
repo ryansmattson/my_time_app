@@ -46,4 +46,18 @@ router.put('/clockOut', function(req, res) {
 });
 
 
+router.delete('/deleteTime/:id', function(req, res) {
+	var time_id = req.params.id;
+
+	Time.deleteTime(time_id, function(err) {
+		if (err) {
+			console.log(err);
+			res.sendStatus(500);
+		} else {
+			res.sendStatus(200);
+		}
+	});
+});
+
+
 module.exports = router;

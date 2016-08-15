@@ -8,7 +8,7 @@ router.post('/', function(req, res) {
 
 	var userId = req.user.id;
 
-	Invoice.createInvoice(data.address, data.balance_due, data.bill_to, data.description, data.due_date, data.email, data.from_name, data.invoice_date, data.invoice_to, data.notes, data.phone, data.rate, data.terms, userId, function(err) {
+	Invoice.createInvoice(data.address, data.balance_due, data.bill_to, data.description, data.due_date, data.email, data.from_name, data.hours, data.invoice_date, data.invoice_number, data.invoice_to, data.notes, data.phone, data.rate, data.terms, userId, function(err) {
 		if (err) {
 			console.log(err);
 			res.sendStatus(500);
@@ -50,7 +50,21 @@ router.get('/getInvoice/:id', function(req, res) {
 router.put('/updateInvoice', function(req, res) {
 	var data = req.body;
 
-	Invoice.updateInvoice(data.id, data.address, data.balance_due, data.bill_to, data.description, data.due_date, data.email, data.from_name, data.invoice_date, data.invoice_to, data.notes, data.phone, data.rate, data.terms, function(err) {
+	Invoice.updateInvoice(data.id, data.address, data.balance_due, data.bill_to, data.description, data.due_date, data.email, data.from_name, data.hours, data.invoice_date, data.invoice_number, data.invoice_to, data.notes, data.phone, data.rate, data.terms, function(err) {
+		if (err) {
+			console.log(err);
+			res.sendStatus(500);
+		} else {
+			res.sendStatus(200);
+		}
+	});
+});
+
+
+router.delete('/deleteInvoice/:id', function(req, res) {
+	var invoice_id = req.params.id;
+
+	Invoice.deleteInvoice(invoice_id, function(err) {
 		if (err) {
 			console.log(err);
 			res.sendStatus(500);

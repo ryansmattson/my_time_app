@@ -14,40 +14,40 @@
                 <div layout="row">
                     <md-input-container flex="50">
                         <label>First Name:</label>
-                        <input type="text" ng-model="editinvoice.invoice.full_name"></input>
+                        <input type="text" ng-model="profile.currentUser.first_name"></input>
                     </md-input-container>
                     <md-input-container flex="50">
                         <label>Last Name:</label>
-                        <input type="text" ng-model="editinvoice.invoice.full_name"></input>
+                        <input type="text" ng-model="profile.currentUser.last_name"></input>
                     </md-input-container>
                 </div>
 
                 <div layout="row">
                     <md-input-container flex="50">
                         <label>Phone:</label>
-                        <input type="text" ng-model="editinvoice.invoice.phone"></input>
+                        <input type="text" ng-model="profile.currentUser.phone"></input>
                     </md-input-container>
                     <md-input-container flex="50">
                         <label>Email:</label>
-                        <input type="text" ng-model="editinvoice.invoice.email"></input>
+                        <input type="text" ng-model="profile.currentUser.email"></input>
                     </md-input-container>
                 </div>
 
                 <md-input-container>
                     <label>Address:</label>
-                    <input type="text" ng-model="editinvoice.invoice.address"></input>
+                    <input type="text" ng-model="profile.currentUser.address"></input>
                 </md-input-container>
 
                 <div layout="row">
                     <md-input-container flex="25">
                         <label>Standard Rate:</label>
-                        <input type="text" ng-model="editinvoice.invoice.finalRate"></input>
+                        <input type="text" ng-model="profile.currentUser.hourly_rate"></input>
                     </md-input-container>
                 </div>
 
             </form>
             <div layout="row" layout-align="end">
-                <md-button layout-align="center end" class="md-raised" ng-click="profile.updateUser()">Save</md-button>
+                <md-button layout-align="center end" class="md-raised" ng-click="profile.updateUser(profile.currentUser.id, profile.currentUser.first_name, profile.currentUser.last_name, profile.currentUser.phone, profile.currentUser.email, profile.currentUser.address, profile.currentUser.hourly_rate); profile.currentJobRoute()">Save</md-button>
                 <md-button layout-align="center end" class="md-raised" ng-click="profile.currentJobRoute()">Cancel</md-button>
             </div>
         </md-content>

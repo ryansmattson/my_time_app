@@ -25,7 +25,22 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	}
 
 
+	vm.deleteTime = function(id, ev){
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm =
+			$mdDialog.confirm()
+			.title('Are you sure you want to delete this time?')
+			.textContent('This action cannot be undone.')
+			.ariaLabel('Delete time?')
+			.targetEvent(ev)
+			.ok('Delete')
+			.cancel('Cancel');
 
+		$mdDialog.show(confirm).then(function() {
+			TimesFactory.deleteTime(id);
+			JobFactory.getCurrentJob();
+		});
+	}
 
 
 //Sends the clock in time to the database and creates a new entry.
@@ -56,6 +71,7 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 	function handleClockOutSuccess(res) {
 		console.log('Clock out success', res);
+		JobFactory.getCurrentJob();
 	}
 	function handleClockOutFailure(res) {
 		console.log('Clock out Failure', res);

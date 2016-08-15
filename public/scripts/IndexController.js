@@ -6,8 +6,11 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 
 	vm.currentTab = RouteFactory.currentTab;
 
-
 	vm.currentUser = UserFactory.currentUser;
+
+	function updateCurrentUser(){
+		vm.currentUser = UserFactory.currentUser;
+	}
 
 	vm.allJobsRoute = function() {
 		RouteFactory.allJobsRoute();
@@ -40,7 +43,9 @@ function handleLogoutSucess(res){
 	console.log('Logout successful:', res);
 	console.log('UserFactory.currentUser before reset: ', UserFactory.currentUser);
 	UserFactory.currentUser = {};
-	vm.currentUser = UserFactory.currentUser;
+	// vm.currentUser = UserFactory.currentUser;
+	updateCurrentUser()
+
 	RouteFactory.homeRoute();
 	console.log('UserFactory.currentUser after reset: ', UserFactory.currentUser);
 	console.log('vm.currentUser after reset: ', vm.currentUser);
@@ -68,7 +73,8 @@ function handleLogoutFailure(res){
 		UserFactory.getCurrentUser();
 		JobFactory.getCurrentJob();
 		RouteFactory.currentJobRoute();
-		vm.currentUser = UserFactory.currentUser;
+		// vm.currentUser = UserFactory.currentUser;
+		updateCurrentUser()
 	}
 
 	function handleLoginFailure(res) {
@@ -137,5 +143,6 @@ function handleLogoutFailure(res){
 		console.log('Failure posting of user info', res);
 	}
 
+	updateCurrentUser()
 
 }]);

@@ -1,4 +1,4 @@
-angular.module('myTimeApp').factory('JobFactory', function($location, $http, TimesFactory, DateTimeFactory, UserFactory) {
+angular.module('myTimeApp').factory('JobFactory', function($location, $http, TimesFactory, DateTimeFactory, UserFactory, RouteFactory) {
 
 	var currentJob = {};
 
@@ -37,13 +37,40 @@ angular.module('myTimeApp').factory('JobFactory', function($location, $http, Tim
 
 
 
+	function setAsCurrentJob(job_id) {
+		var sendData = {};
+		sendData.job_id = job_id;
+
+		$http.put('/jobs/changeCurrentJob', sendData).then(handleSetAsCurrentSucces, handleSetAsCurrentFailure);
+	}
+
+	function handleSetAsCurrentSucces(res) {
+		console.log('Successfully set as current job', res);
+    RouteFactory.currentJobRoute();
+	}
+
+	function handleSetAsCurrentFailure(res) {
+		console.log('Failure', res);
+	}
+
+
+	function deleteJob(id){
+		$http.delete('/jobs/deleteJob/' + id).then(handleDeleteSucces, handleDeleteFailure);
+	}
+	function handleDeleteSucces(res){
+		console.log('Successfully deleted job:', res);
+	}
+	function handleDeleteFailure(res){
+		console.log('Could not delete job:', res);
+	}
+
+
 
 
 	return {
-		// calcTotalJobBalance : calcTotalJobBalance,
-		currentJob : currentJob,
-    getCurrentJob : getCurrentJob,
-    // totalJobBalance : totalJobBalance
-
+		currentJob: currentJob,
+		deleteJob: deleteJob,
+    getCurrentJob: getCurrentJob,
+		setAsCurrentJob: setAsCurrentJob
 	}
 })

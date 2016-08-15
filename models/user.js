@@ -101,10 +101,35 @@ function createUser(first, last, username, password, email, phone, address, hour
 	});
 }
 
+function updateUser(id, first_name, last_name, phone, email, address, hourly_rate, callback) {
+	pool.connect(function(err, client, done) {
+		if (err) {
+			done();
+			return callback(err);
+		}
+
+		client.query('UPDATE users SET (id, first_name, last_name, phone, email, address, hourly_rate) ' +
+			'= ($1, $2, $3, $4, $5, $6, $7) WHERE id = $1;', [id, first_name, last_name, phone, email, address, hourly_rate],
+			function(err, result) {
+				if (err) {
+					done();
+					return callback(err);
+				}
+
+				callback(null);
+				done();
+			});
+	});
+}
+
+
+
+
 
 module.exports = {
 	createUser: createUser,
   findAndComparePassword: findAndComparePassword,
   findById: findById,
-  findByUsername:findByUsername
+  findByUsername:findByUsername,
+	updateUser: updateUser
 };

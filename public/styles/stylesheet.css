@@ -4,10 +4,20 @@
 }
 .current-tab {
   font-weight: bold;
+  /*color: #FF5824;*/
+  background-color: #f1f1f1;
+}
+.invoice-button {
+  height: 45px;
+  color: #f1f1f1;
+}
+.lightgray {
+  color: rgb(145, 145, 145);
 }
 .loginModal {
   padding: 20px;
   min-width: 400px;
+  min-height: 325px;
 }
 .navbar {
   margin: 0 40px 20px 40px;
@@ -28,10 +38,34 @@
 }
 .timer-numbers {
   font-size: 6em;
+  /*color: rgb(72, 192, 246);*/
+  /*color: rgb(40, 44, 52);*/
+  /*text-shadow: 1px 1px rgb(40, 44, 52);;*/
 }
 .top-right {
   margin: 10px 25px 0 0;
 }
+#full-header {
+  margin-bottom: 40px;
+}
 #header-logo {
   width: 330px;
+}
+#separator {
+  margin-right: 5px;
+}
+
+@media print {
+  #full-header {
+    display: none;
+  }
+  .button {
+    display: none;
+  }
+  .toolbar {
+    display: none;
+  }
+  .lightgray {
+    margin: 8px;
+  }
 }

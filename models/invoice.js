@@ -9,15 +9,15 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-function createInvoice(address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms, user_id, callback) {
+function createInvoice(address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms, user_id, callback) {
 	pool.connect(function(err, client, done) {
 		if (err) {
 			done();
 			return callback(err);
 		}
 
-		client.query('INSERT INTO invoices (address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms, user_id)' +
-			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);', [address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms, user_id],
+		client.query('INSERT INTO invoices (address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms, user_id)' +
+			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16);', [address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms, user_id],
 			function(err, result) {
 				if (err) {
 					done();
@@ -30,15 +30,15 @@ function createInvoice(address, balance_due, bill_to, description, due_date, ema
 	});
 }
 
-function updateInvoice(id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms, callback) {
+function updateInvoice(id, address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms, callback) {
 	pool.connect(function(err, client, done) {
 		if (err) {
 			done();
 			return callback(err);
 		}
 
-		client.query('UPDATE invoices SET (id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms) ' +
-			'= ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) WHERE id = $1;', [id, address, balance_due, bill_to, description, due_date, email, from_name, invoice_date, invoice_to, notes, phone, rate, terms],
+		client.query('UPDATE invoices SET (id, address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms) ' +
+			'= ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) WHERE id = $1;', [id, address, balance_due, bill_to, description, due_date, email, from_name, hours, invoice_date, invoice_number, invoice_to, notes, phone, rate, terms],
 			function(err, result) {
 				if (err) {
 					done();
@@ -111,8 +111,9 @@ function findInvoiceById(id, callback){
 
 
 module.exports = {
-  createInvoice : createInvoice,
-	findAllUserInvoices : findAllUserInvoices,
-	findInvoiceById : findInvoiceById,
+  createInvoice: createInvoice,
+	deleteInvoice: deleteInvoice,
+	findAllUserInvoices: findAllUserInvoices,
+	findInvoiceById: findInvoiceById,
 	updateInvoice: updateInvoice
 };

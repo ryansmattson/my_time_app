@@ -1,86 +1,95 @@
-<h2>Create Invoice</h2>
-
-<div layout="row" layout-align="center">
+<div class="container" layout="row" layout-align="center start">
 
 
-
-  <div layout="column" layout-align="center" layout-margin>
-    <label>Invoice #</label>
-    <md-input-container>
-        <p class="invoice-form-data" ng-show="newinvoice.editableField.invoice" ng-model="newinvoice.invoiceNumber"></p>
-        <input type="text" ng-hide="newinvoice.editableField.invoice"></input>
-    </md-input-container>
-
-    <label class="md-subhead">Description:</label>
-    <md-input-container>
-      <div ng-show="newinvoice.editableField.description">
-        <p class="invoice-form-data">{{newinvoice.invoice.description}}</p>
-        <md-button ng-click="newinvoice.turnOnEditField('description')">edit</md-button>
-      </div>
-
-      <div ng-hide="newinvoice.editableField.description">
-        <input type="text" ng-model="newinvoice.invoice.description"></input>
-        <md-button ng-click="newinvoice.submitEditField('description', newinvoice.invoice.description)">done</md-button>
-      </div>
-
-    </md-input-container>
-        <!-- <label>Invoice Date:</label> -->
-        <label class="md-subhead">Invoice Date:</label>
-        <md-datepicker ng-model="newinvoice.invoiceDate" md-placeholder="Invoice Date:"></md-datepicker>
-        <!-- <input type="date" ng-model="newinvoice.invoiceDate"></input> -->
-        <!-- <label>Due Date:</label> -->
-        <label class="md-subhead">Due Date:</label>
-        <md-datepicker ng-model="newinvoice.dueDate" md-placeholder="Due Date:"></md-datepicker>
-    <md-input-container>
-        <label>From:</label>
-        <input type="text" ng-model="newinvoice.currentUser.full_name"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Address:</label>
-        <input type="text" ng-model="newinvoice.currentUser.address"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Phone:</label>
-        <input type="text" ng-model="newinvoice.currentUser.phone"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Email:</label>
-        <input type="text" ng-model="newinvoice.currentUser.email"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Bill to:</label>
-        <input type="text" ng-model="newinvoice.currentJob.bill_organization"></input>
-    </md-input-container>
-  </div>
+    <div class="form md-whiteframe-z2" layout="column" flex="70">
+      <md-toolbar class="toolbar md-warn">
+        <h2 class="md-toolbar-tools">
+          <span>Create Invoice</span>
+        </h2>
+      </md-toolbar>
+        <md-content layout="column" class="md-padding">
 
 
-  <div layout="column" layout-align="center" layout-margin>
-    <md-input-container>
-        <label>Invoice to:</label>
-        <input type="text" ng-model="newinvoice.currentJob.bill_individual"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Hours:</label>
-        <input type="number" ng-model="newinvoice.totalJobTime.hours"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Rate:</label>
-        <input type="text" ng-model="newinvoice.finalRate"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Balance Due:</label>
-        <input type="text" ng-model="newinvoice.totalJobBalance"></input>
-    </md-input-container>
-    <md-input-container>
-        <label>Additional Notes:</label>
-        <textarea type="text" ng-model="newinvoice.currentJob.notes"></textarea>
-    </md-input-container>
-    <md-input-container>
-        <label>Terms and Conditions:</label>
-        <textarea type="text" ng-model="newinvoice.terms"></textarea>
-    </md-input-container>
-  </div>
+            <form class="md-padding" layout="column">
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Invoice #</label>
+                        <input type="text" ng-model="newinvoice.invoice.invoiceNumber"></input>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Description</label>
+                        <input type="text" ng-model="newinvoice.invoice.description"></input>
+                    </md-input-container>
+                </div>
 
+                <div layout="row">
+                    <!-- <label>Invoice Date</label> -->
+                    <md-datepicker ng-model="newinvoice.invoice.invoiceDate" md-placeholder="Invoice Date" flex></md-datepicker>
+                    <!-- <label>Due Date</label> -->
+                    <md-datepicker ng-model="newinvoice.invoice.dueDate" md-placeholder="Due Date" flex> </md-datepicker>
+                </div>
+
+                <md-input-container flex>
+                    <label>From:</label>
+                    <input type="text" ng-model="newinvoice.invoice.from"></input>
+                </md-input-container>
+
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Phone:</label>
+                        <input type="text" ng-model="newinvoice.invoice.phone"></input>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Email:</label>
+                        <input type="text" ng-model="newinvoice.invoice.email"></input>
+                    </md-input-container>
+                </div>
+
+                <md-input-container>
+                    <label>Address:</label>
+                    <input type="text" ng-model="newinvoice.invoice.address"></input>
+                </md-input-container>
+
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Bill to:</label>
+                        <input type="text" ng-model="newinvoice.invoice.billTo"></input>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Invoice to:</label>
+                        <input type="text" ng-model="newinvoice.invoice.invoiceTo"></input>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Hours:</label>
+                        <input type="text" ng-model="newinvoice.invoice.hours"></input>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Rate:</label>
+                        <input type="text" ng-model="newinvoice.invoice.rate"></input>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Balance Due:</label>
+                        <input type="text" ng-model="newinvoice.invoice.balanceDue">
+                        </input>
+                    </md-input-container>
+                </div>
+                <md-input-container flex>
+                    <label>Additional Notes:</label>
+                    <textarea type="text" rows="3" ng-model="newinvoice.invoice.notes"></textarea>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Terms and Conditions:</label>
+                    <textarea type="text" rows="3" ng-model="newinvoice.invoice.terms"></textarea>
+                </md-input-container>
+            </form>
+            <div layout="row" layout-align="end">
+                <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.createNewInvoice(newinvoice.invoice); newinvoice.invoicesRoute()">Save</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.saveAndPrintInvoice(newinvoice.invoice)">Print</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.currentJobRoute()">Cancel</md-button>
+            </div>
+        </md-content>
+    </div>
 </div>
-<md-button flex-align="center end" class="md-raised" ng-click="newinvoice.createNewInvoice(newinvoice.invoice)">Save</md-button>
-<md-button flex-align="center end" class="md-raised" ng-click="newinvoice.createAndPrintNewInvoice(newinvoice.invoice)">Save/Print</md-button>

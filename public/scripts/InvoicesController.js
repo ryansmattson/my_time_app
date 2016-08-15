@@ -3,7 +3,7 @@
 //print-invoice.html
 //new-invoice.html
 
-angular.module('myTimeApp').controller('InvoicesController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'JobFactory', 'TimesFactory', 'InvoiceFactory', function($http, $location, $interval, $mdDialog, RouteFactory, JobFactory, TimesFactory, InvoiceFactory) {
+angular.module('myTimeApp').controller('InvoicesController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'JobFactory', 'TimesFactory', 'InvoiceFactory', 'DateTimeFactory', function($http, $location, $interval, $mdDialog, RouteFactory, JobFactory, TimesFactory, InvoiceFactory, DateTimeFactory) {
 
 	var vm = this;
 
@@ -14,22 +14,42 @@ angular.module('myTimeApp').controller('InvoicesController', ['$http', '$locatio
 		InvoiceFactory.getAndEditInvoice(id);
 	}
 
+	vm.deleteInvoice = function(id, ev) {
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm =
+			$mdDialog.confirm()
+			.title('Are you sure you want to delete this invoice?')
+			.textContent('This action cannot be undone.')
+			.ariaLabel('Delete invoice?')
+			.targetEvent(ev)
+			.ok('Delete')
+			.cancel('Cancel');
 
-	vm.editInvoiceRoute = function(){
+		$mdDialog.show(confirm).then(function() {
+			InvoiceFactory.deleteInvoice(id);
+			getAllInvoices();
+		});
+	}
+
+	vm.editInvoiceRoute = function() {
 		RouteFactory.editInvoiceRoute();
 	}
 
 
 	function getAllInvoices() {
-		$http.get('/invoices/allInvoices').then(handleGetJobsSuccess, handleGetJobsFailure);
+		$http.get('/invoices/allInvoices').then(handleGetInvoicesSuccess, handleGetInvoicesFailure);
 	}
 
-	function handleGetJobsSuccess(res) {
+	function handleGetInvoicesSuccess(res) {
 		console.log('Successf!', res);
 		vm.allInvoicesList = res.data;
+		console.log('vm.allInvoicesList', vm.allInvoicesList);
+		for (var i = 0; i < vm.allInvoicesList.length; i++) {
+			vm.allInvoicesList[i].invoice_date = DateTimeFactory.formatForDate(vm.allInvoicesList[i].invoice_date);
+		}
 	}
 
-	function handleGetJobsFailure(res) {
+	function handleGetInvoicesFailure(res) {
 		console.log('Failure!', res);
 	}
 
@@ -55,6 +75,4 @@ angular.module('myTimeApp').controller('InvoicesController', ['$http', '$locatio
 
 	getAllInvoices();
 	RouteFactory.changeCurrentTab('invoices');
-
-
 }]);

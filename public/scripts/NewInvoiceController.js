@@ -1,19 +1,29 @@
-angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'TimesFactory', 'JobFactory', 'UserFactory', 'DateTimeFactory', 'InvoiceFactory', function($http, $location, $interval, $mdDialog, RouteFactory, TimesFactory, JobFactory, UserFactory, DateTimeFactory, InvoiceFactory) {
+angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$location', '$interval', '$mdDialog', '$mdToast', 'RouteFactory', 'TimesFactory', 'JobFactory', 'UserFactory', 'DateTimeFactory', 'InvoiceFactory', function($http, $location, $interval, $mdDialog, $mdToast, RouteFactory, TimesFactory, JobFactory, UserFactory, DateTimeFactory, InvoiceFactory) {
 
 	var vm = this;
-	vm.totalJobBalance;
-	vm.finalRate;
-	vm.editableField = {
-		invoice: false, description: false, invoiceDate: false,	dueDate: false,	from: false, address: false,	phone: false,	email: false,	billTo: false, invoiceTo: false, hours: false, rate: false, balanceDue: false, notes: false, terms: false
-	}
-
-	vm.createNewInvoice = function(invoice){
-		InvoiceFactory.createNewInvoice(invoice);
-	}
 
 	vm.invoice = {};
-	//terms
 
+
+	vm.totalJobBalance;
+	vm.finalRate;
+	// vm.editableField = {
+	// 	invoice: false,
+	// 	description: false,
+	// 	invoiceDate: false,
+	// 	dueDate: false,
+	// 	from: false,
+	// 	address: false,
+	// 	phone: false,
+	// 	email: false,
+	// 	billTo: false,
+	// 	invoiceTo: false,
+	// 	hours: false,
+	// 	rate: false,
+	// 	balanceDue: false,
+	// 	notes: false,
+	// 	terms: false
+	// }
 
 
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
@@ -53,11 +63,23 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	// address
 	// hourly_rate
 
+	vm.currentJobRoute = function() {
+		RouteFactory.currentJobRoute();
+	}
 
-vm.createAndPrintNewInvoice = function(invoice){
-	vm.createNewInvoice(invoice);
-	RouteFactory.printInvoiceRoute();
-}
+	vm.invoicesRoute = function() {
+		RouteFactory.invoicesRoute();
+	}
+
+	vm.createNewInvoice = function(invoice) {
+		InvoiceFactory.createNewInvoice(invoice);
+	}
+
+
+	vm.createAndPrintNewInvoice = function(invoice) {
+		vm.createNewInvoice(invoice);
+		RouteFactory.printInvoiceRoute();
+	}
 
 
 	function buildInvoice() {
@@ -65,15 +87,17 @@ vm.createAndPrintNewInvoice = function(invoice){
 		vm.invoice.balanceDue = vm.totalJobBalance;
 		vm.invoice.billTo = vm.currentJob.bill_organization
 		vm.invoice.description = vm.currentJob.name;
-		// vm.invoice.dueDate =
+		vm.invoice.dueDate;
 		vm.invoice.email = vm.currentUser.email;
 		vm.invoice.from = vm.currentUser.full_name;
 		vm.invoice.hours = vm.totalJobTime.hours
-		vm.invoice.invoiceDate = new Date();
+		vm.invoice.invoiceDate;
+		vm.invoice.invoiceNumber;
 		vm.invoice.invoiceTo = vm.currentJob.bill_individual
 		vm.invoice.notes = vm.currentJob.notes;
 		vm.invoice.phone = vm.currentUser.phone;
 		vm.invoice.rate = vm.finalRate;
+		vm.invoice.terms;
 	}
 
 

@@ -1,4 +1,4 @@
-<h1>All Jobs</h1>
+<!-- <h1>All Jobs</h1>
 
 <ul style="border: solid" ng-repeat="job in alljobs.allJobsList">
   <p>Name: {{job.name}}</p>
@@ -9,25 +9,25 @@
   <p>Notes: {{job.notes}}</p>
   <md-button ng-click="alljobs.setAsCurrentJob(job.id)">Open Job</md-button>
   <md-button>Edit Job</md-button>
-</ul>
+</ul> -->
+
 <div class="container" layout="row" layout-align="center start">
 
     <div class="form md-whiteframe-z2" layout="column" flex="70">
         <md-toolbar class="md-warn">
             <h2 class="md-toolbar-tools">
-      <span>Invoices</span>
+      <span>All Jobs</span>
     </h2>
         </md-toolbar>
         <md-content>
             <md-list layout-margin>
-                <md-list-item class="md-3-line" ng-repeat="invoice in invoices.allInvoicesList">
+                <md-list-item class="md-3-line" ng-repeat="job in alljobs.allJobsList">
                     <div class="md-list-item-text" layout-padding>
                         <h3>{{job.name}}</h3>
                         <h4>Date: {{job.date_created}}</h4>
-                        <p>Hours: {{invoice.hours}}</p>
-                        <p>Balance Due: ${{invoice.balance_due}}</p>
                     </div>
-                    <md-button class="md-secondary" ng-click="invoices.getAndEditInvoice(invoice.id)">Open</md-button>
+                    <md-button class="md-secondary md-secondary md-primary md-hue-2" ng-click="alljobs.setAsCurrentJob(job.id)">Open</md-button>
+                    <md-button class="md-secondary md-warn md-accent md-hue-2" ng-click="alljobs.deleteJob(job.id, $event)">Delete</md-button>
                     <md-divider ng-if="!$last"></md-divider>
                 </md-list-item>
             </md-list>

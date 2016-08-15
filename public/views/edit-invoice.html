@@ -2,11 +2,11 @@
 
 
     <div class="form md-whiteframe-z2" layout="column" flex="70">
-      <md-toolbar class="md-warn">
-        <h2 class="md-toolbar-tools">
+        <md-toolbar class="toolbar md-warn">
+            <h2 class="md-toolbar-tools">
           <span>Edit Invoice</span>
         </h2>
-      </md-toolbar>
+        </md-toolbar>
         <md-content layout="column" class="md-padding">
 
 
@@ -14,7 +14,7 @@
                 <div layout="row">
                     <md-input-container flex>
                         <label>Invoice #</label>
-                        <input type="number" ng-model="editinvoice.invoice.invoice_number"></input>
+                        <input type="text" ng-model="editinvoice.invoice.invoice_number"></input>
                     </md-input-container>
                     <md-input-container flex>
                         <label>Description</label>
@@ -23,15 +23,26 @@
                 </div>
 
                 <div layout="row">
-                    <!-- <label>Invoice Date</label> -->
-                    <md-datepicker ng-model="editinvoice.invoice.invoice_date" md-placeholder="Invoice Date" flex></md-datepicker>
-                    <!-- <label>Due Date</label> -->
-                    <md-datepicker ng-model="editinvoice.invoice.due_date" md-placeholder="Due Date" flex> </md-datepicker>
+                    <div layout="row" layout-fill flex="50" layout-align="space-between center">
+                        <label class="lightgray">Invoice Date:</label>
+                        <p ng-hide="editinvoice.editableField.invoiceDate"> {{editinvoice.invoiceDatePretty}} </p>
+                        <md-datepicker ng-show="editinvoice.editableField.invoiceDate" ng-model="editinvoice.invoiceDate" md-placeholder="Invoice Date" flex></md-datepicker>
+                        <md-button class="button md-primary md-hue-2" ng-hide="editinvoice.editableField.invoiceDate" ng-click="editinvoice.editField('invoiceDate')">edit</md-button>
+                        <md-button class="button md-primary md-hue-2" ng-show="editinvoice.editableField.invoiceDate" ng-click="editinvoice.doneEditing('invoiceDate')">done</md-button>
+                    </div>
+
+                    <div layout="row" layout-fill flex="50" layout-align="space-between center">
+                        <label class="lightgray">Due Date:</label>
+                        <p ng-hide="editinvoice.editableField.dueDate"> {{editinvoice.dueDatePretty}} </p>
+                        <md-datepicker ng-show="editinvoice.editableField.dueDate" ng-model="editinvoice.dueDate" md-placeholder="Due Date" flex> </md-datepicker>
+                        <md-button class="button md-primary md-hue-2" ng-hide="editinvoice.editableField.dueDate" ng-click="editinvoice.editField('dueDate')">edit</md-button>
+                        <md-button class="button md-primary md-hue-2" ng-show="editinvoice.editableField.dueDate" ng-click="editinvoice.doneEditing('dueDate')">done</md-button>
+                    </div>
                 </div>
 
                 <md-input-container flex>
                     <label>From:</label>
-                    <input type="text" ng-model="editinvoice.invoice.full_name"></input>
+                    <input type="text" ng-model="editinvoice.invoice.from_name"></input>
                 </md-input-container>
 
                 <div layout="row">
@@ -64,11 +75,11 @@
                 <div layout="row">
                     <md-input-container flex>
                         <label>Hours:</label>
-                        <input type="number" ng-model="editinvoice.invoice.hours"></input>
+                        <input type="text" ng-model="editinvoice.invoice.hours"></input>
                     </md-input-container>
                     <md-input-container flex>
                         <label>Rate:</label>
-                        <input type="text" ng-model="editinvoice.invoice.finalRate"></input>
+                        <input type="text" ng-model="editinvoice.invoice.rate"></input>
                     </md-input-container>
                     <md-input-container flex>
                         <label>Balance Due:</label>
@@ -86,9 +97,9 @@
                 </md-input-container>
             </form>
             <div layout="row" layout-align="end">
-                <md-button layout-align="center end" class="md-raised" ng-click="editinvoice.updateInvoice(editinvoice.invoice); editinvoice.invoicesRoute()">Save</md-button>
-                <md-button layout-align="center end" class="md-raised" ng-click="editinvoice.saveAndPrintInvoice(editinvoice.invoice)">Print</md-button>
-                <md-button layout-align="center end" class="md-raised" ng-click="editinvoice.invoicesRoute()">Cancel</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="editinvoice.updateInvoice(editinvoice.invoice); editinvoice.invoicesRoute()">Save</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="editinvoice.saveAndPrintInvoice(editinvoice.invoice); editinvoice.print()">Print</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="editinvoice.invoicesRoute()">Cancel</md-button>
             </div>
         </md-content>
     </div>

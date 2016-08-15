@@ -1,4 +1,49 @@
-<h2>New Job</h2>
+<div class="container" layout="row" layout-align="center start">
+
+
+    <div class="form md-whiteframe-z2" layout="column" flex="70">
+        <md-toolbar class="md-warn">
+            <h2 class="md-toolbar-tools">
+              <span>New Job</span>
+            </h2>
+        </md-toolbar>
+        <md-content layout="column" class="md-padding">
+
+
+            <form class="md-padding" layout="column">
+                <div layout="column">
+                    <md-input-container flex="50">
+                        <label>Job Name:</label>
+                        <input ng-model="newjob.name" required></input>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Hourly Rate:</label>
+                        <input type="text" ng-model="newjob.rate"></input>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Bill to <span class="md-subhead"> (Company)</span>:</label>
+                        <input type="text" ng-model="newjob.company"></input>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Invoice to<span class="md-subhead"> (Individual)</span>:</label>
+                        <input type="text" ng-model="newjob.individual"></input>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Notes:</label>
+                        <textarea rows="3" ng-model="newjob.notes"></textarea>
+                    </md-input-container>
+                </div>
+            </form>
+
+            <div layout="row" layout-align="end">
+                <md-button flex-align="center end" class="md-raised" ng-click="newjob.submitNewJob(newjob.name, newjob.rate, newjob.company, newjob.individual, newjob.notes)">Submit</md-button>
+            </div>
+        </md-content>
+    </div>
+</div>
+
+
+<!--
 
 <div layout="row" layout-align="center">
 
@@ -27,4 +72,4 @@
 
 </div>
 
-<md-button flex-align="center end" class="md-raised" ng-click="newjob.submitNewJob(newjob.name, newjob.rate, newjob.company, newjob.individual, newjob.notes)">Submit</md-button>
+<md-button flex-align="center end" class="md-raised" ng-click="newjob.submitNewJob(newjob.name, newjob.rate, newjob.company, newjob.individual, newjob.notes)">Submit</md-button> -->

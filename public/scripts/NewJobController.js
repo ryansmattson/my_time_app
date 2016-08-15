@@ -13,18 +13,14 @@ angular.module('myTimeApp').controller('NewJobController', ['$http', '$location'
 		sendData.notes = notes;
 
 		$http.post('/jobs', sendData).then(handleSuccess, handleFailure);
-
 	}
-
 	function handleSuccess(res) {
-		// $location.path('/current-job');
 		console.log('Success!', res);
-		RouteFactory.currentJobRoute();
+		RouteFactory.allJobsRoute();
 	}
-
 	function handleFailure(res) {
 		console.log('Failure!', res);
 	}
 
-	RouteFactory.changeCurrentTab('currentJob');
+	RouteFactory.changeCurrentTab('allJobs');
 }]);

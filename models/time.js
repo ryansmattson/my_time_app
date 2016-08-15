@@ -92,11 +92,31 @@ function findCurrentTime(job_id, time_id, callback){
 }
 
 
+function deleteTime(id, callback){
+	pool.connect(function(err, client, done){
+		if(err){
+			done();
+			return callback(err);
+		}
+
+		client.query('DELETE FROM times WHERE id = $1;', [id], function(err, result){
+			if(err){
+				done();
+				return callback(err);
+			}
+			callback(null);
+			done();
+		});
+	});
+}
+
+
 
 
 module.exports = {
   createClockIn : createClockIn,
   createClockOut : createClockOut,
+	deleteTime: deleteTime,
   findAllTimes : findAllTimes,
   findCurrentTime : findCurrentTime
 }
