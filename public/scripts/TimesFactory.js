@@ -83,6 +83,10 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 				totalJobTime.millis = tempTotalJobTime;
 				totalJobTime.hours = DateTimeFactory.msToHours(tempTotalJobTime);
 				totalJobTime.pretty = DateTimeFactory.msToTime(tempTotalJobTime);
+		} else {
+			totalJobTime.millis = 0;
+			totalJobTime.hours = 0;
+			totalJobTime.pretty = '00:00:00';
 		}
 	}
 
@@ -96,21 +100,6 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 	function handleDeleteFailure(res){
 		console.log('Could not deleted time.', res);
 	}
-
-	// function userOrJobRate() {
-	// 	if (JobFactory.currentJob.hourly_rate !== null) {
-	// 		return JobFactory.currentJob.hourly_rate;
-	// 	} else {
-	// 		return UserFactory.currentUser.hourly_rate;
-	// 	}
-	// }
-	//
-	// function calcTotalJobBalance(time, rate) {
-	// 	var total = (time * rate).toFixed(2);
-	//
-	// 	return parseFloat(total);
-	// }
-
 
 
 

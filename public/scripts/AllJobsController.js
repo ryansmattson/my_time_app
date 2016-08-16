@@ -1,4 +1,4 @@
-angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'JobFactory', 'TimesFactory', function($http, $location, $interval, $mdDialog, RouteFactory, JobFactory, TimesFactory) {
+angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location', '$interval', '$mdDialog', 'RouteFactory', 'JobFactory', 'TimesFactory', 'DateTimeFactory', function($http, $location, $interval, $mdDialog, RouteFactory, JobFactory, TimesFactory, DateTimeFactory) {
 
 	var vm = this;
 
@@ -10,6 +10,10 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 	function handleGetJobsSuccess(res) {
 		console.log('Successfully got all jobs!', res);
 		vm.allJobsList = res.data;
+		for(var i = 0; i < vm.allJobsList.length; i++){
+			date = new Date(vm.allJobsList[i].date_created)
+			vm.allJobsList[i].dateCreatedPretty = DateTimeFactory.formatForDate(date);
+		}
 	}
 	function handleGetJobsFailure(res) {
 		console.log('Failure!', res);

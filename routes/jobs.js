@@ -80,6 +80,9 @@ router.get('/currentJob', function(req, res){
 router.delete('/deleteJob/:id', function(req, res) {
 	var job_id = req.params.id;
 
+	console.log("Jobs 83");
+
+
 	Job.deleteJob(job_id, function(err) {
 		if (err) {
 			console.log(err);

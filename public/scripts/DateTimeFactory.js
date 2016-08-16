@@ -40,9 +40,14 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 	// mm/dd/yyyy
 	function formatForDate(dateStamp) {
 		dateStamp = new Date(dateStamp);
+		// console.log('dateStamp:', dateStamp);
 		var year = dateStamp.getFullYear();
 		var month = dateStamp.getMonth() + 1; //getMonth is zero indexed
 		var day = dateStamp.getDate();
+		//
+		// console.log('year:', year);
+		// console.log('month:', month);
+		// console.log('day:', day);
 
 		var tempDate = month + '/' + day + '/' + year;
 

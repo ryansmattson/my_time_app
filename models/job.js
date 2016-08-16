@@ -108,6 +108,8 @@ function findCurrentJob(user_id, callback){
 
 
 function deleteJob(id, callback){
+	console.log("Job 111");
+
 	pool.connect(function(err, client, done){
 		if(err){
 			done();

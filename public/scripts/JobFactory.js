@@ -55,6 +55,7 @@ angular.module('myTimeApp').factory('JobFactory', function($location, $http, Tim
 
 
 	function deleteJob(id){
+		console.log("Job Factory 58");
 		$http.delete('/jobs/deleteJob/' + id).then(handleDeleteSucces, handleDeleteFailure);
 	}
 	function handleDeleteSucces(res){
