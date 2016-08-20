@@ -6,14 +6,16 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 	vm.minutes = '00';
 	vm.hours = '00';
 	vm.listOfClockedTimes = [];
+	vm.areClockedTimes = false;
 	var intervalId;
 	var isTimerRunning = false;
 	var clockIn;
 	var clockOut;
 
 
-	function clockedTime(date, startTime, endTime, totalTime) {
-		this.date = date,
+	function clockedTime(index, date, startTime, endTime, totalTime) {
+		this.index = index,
+			this.date = date,
 			this.startTime = startTime,
 			this.endTime = endTime,
 			this.totalTime = totalTime
@@ -24,8 +26,9 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 		var startHours = formatHours(clockOut.getHours());
 		var endAmpm = isAmPm(clockOut.getHours());
 		var endHours = formatHours(clockOut.getHours());
+		var tempIndex = vm.listOfClockedTimes.length;
 
-		var tempDate = clockIn.getDate() + '/' + clockIn.getMonth() + '/' + clockIn.getFullYear();
+		var tempDate = clockIn.getMonth() + '/' + clockIn.getDate() + '/' + clockIn.getFullYear();
 
 		var tempStartTime = startHours + ':' + clockIn.getMinutes() + ':' + clockIn.getSeconds() + ' ' + startAmpm;
 
@@ -33,8 +36,7 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 
 		var tempTotalTime = msToTime((clockOut - clockIn));
 
-		vm.listOfClockedTimes.push(new clockedTime(tempDate, tempStartTime, tempEndTime, tempTotalTime));
-
+		vm.listOfClockedTimes.push(new clockedTime(tempIndex, tempDate, tempStartTime, tempEndTime, tempTotalTime));
 	}
 
 	function isAmPm(hours) {
@@ -88,6 +90,10 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 
 
 	vm.stopTimer = function() {
+		if (!vm.areClockedTimes) {
+			vm.areClockedTimes = true;
+		}
+
 		$interval.cancel(intervalId);
 		vm.seconds = '00';
 		vm.minutes = '00';
@@ -96,6 +102,7 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 		clockOut = new Date();
 		console.log('clockOut:', clockOut);
 		formatClockedHours(clockIn, clockOut);
+		console.log('listOfClockedTimes:', vm.listOfClockedTimes);
 	}
 
 
@@ -145,6 +152,29 @@ angular.module('myTimeApp').controller('HomeController', ['$http', '$location', 
 			return '0' + number;
 		}
 	}
+
+
+	// vm.deleteTime = function(index, ev) {
+	// 	// Appending dialog to document.body to cover sidenav in docs app
+	// 	var confirm =
+	// 		$mdDialog.confirm()
+	// 		.title('Are you sure you want to delete this time?')
+	// 		.textContent('This action cannot be undone.')
+	// 		.ariaLabel('Delete time?')
+	// 		.targetEvent(ev)
+	// 		.ok('Delete')
+	// 		.cancel('Cancel');
+	//
+	// 	$mdDialog.show(confirm).then(function() {
+	// 		for (var i = 0; i < vm.listOfClockedTimes.length; i++) {
+	// 			if (vm.listOfClockedTimes[i].index = index) {
+	// 				// var tempIndex = vm.listOfClockedTimes[i];
+	// 				vm.listOfClockedTimes.splice(i, 1)
+	// 			}
+	// 			console.log('Delete for loop ' + i + ' times through list of clocked times: ' + vm.listOfClockedTimes );
+	// 		}
+	// 	});
+	// }
 
 
 }]);

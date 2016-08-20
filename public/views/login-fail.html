@@ -1,6 +1,26 @@
-<div flex="50" class="loginModal" layout="column" layout-align="center center">
+<!-- <div flex="50" class="loginModal" layout="column" layout-align="center center">
   <h2>Login</h2>
   <h3>Incorrect username or password</h3>
+    <md-input-container>
+        <label>Username:</label>
+        <input ng-model="index.username" md-autofocus></input>
+    </md-input-container>
+    <md-input-container>
+        <label>Password:</label>
+        <input type="password" ng-model="index.password"></input>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="index.loginSubmit(index.username, index.password)">submit</md-button>
+</div> -->
+
+
+<md-toolbar class="md-primary">
+    <h2 class="md-toolbar-tools">
+    <span>Login</span>
+  </h2>
+</md-toolbar>
+<div flex="50" class="loginModal" layout="column" layout-align="center center">
+    <subhead>Incorrect username or password</subhead>
+    <br></br>
     <md-input-container>
         <label>Username:</label>
         <input ng-model="index.username" md-autofocus></input>

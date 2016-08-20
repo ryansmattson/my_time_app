@@ -1,23 +1,49 @@
-<div class="timer-container" layout="row" layout-align="center">
+<div layout="column" layout-align="center">
 
-    <md-card class="timer-card" layout-padding flex="50">
-        <md-card-title>
-            <md-card-title-text layout="row" layout-align="center">
-                <span class="timer-numbers">{{home.hours}}:{{home.minutes}}:{{home.seconds}}</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="center">
-            <md-button flex="25" class="md-raised" ng-click="home.startTimer()">clock-in</md-button>
-            <md-button flex="25" class="md-raised" ng-click="home.stopTimer()">clock-out</md-button>
-        </md-card-actions>
-    </md-card>
+    <div class="timer-container" layout="row" layout-align="center">
+
+        <md-card class="timer-card" layout-padding flex="50">
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="center">
+                    <span class="timer-numbers">{{home.hours}}:{{home.minutes}}:{{home.seconds}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="center">
+                <md-button flex="25" class="md-raised" ng-click="home.startTimer()">clock-in</md-button>
+                <md-button flex="25" class="md-raised" ng-click="home.stopTimer()">clock-out</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+    <div layout="row" layout-align="center">
+        <md-content ng-show="home.areClockedTimes">
+            <md-card class="md-primary">
+                <!-- <md-toolbar class="toolbar" layout="row" layout-align="space-between"> -->
+                <h2 class="md-toolbar-tools">Clocked Times</h2>
+                <!-- <md-button class="button md-raised md-warn md-hue-1" flex="25" ng-click="current.deleteTimes()">Delete</md-button> -->
+                </md-toolbar>
+                <md-list flex>
+                    <md-list-item class="md-3-line" ng-repeat="time in home.listOfClockedTimes">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ time.date }}</h3>
+                            <h4>Total: {{ time.totalTime }}</h4>
+                            <p>{{ time.startTime }} --> {{ time.endTime }}</p>
+                        </div>
+                        <!-- <md-button class="button md-secondary md-warn md-hue-2" ng-click="home.deleteTime(time.index, $event)">Delete</md-button> -->
+                        <!-- <md-checkbox ng-model="time.id"></md-checkbox> -->
+                        <md-divider ng-if="!$last"></md-divider>
+
+                    </md-list-item>
+                </md-list>
+            </md-card>
+        </md-content>
+    </div>
 
 </div>
 
-
-<ul ng-repeat="time in home.listOfClockedTimes">
+<!-- <ul ng-repeat="time in home.listOfClockedTimes">
   <li>Date: {{time.date}}</li>
   <li>Start Time: {{time.startTime}}</li>
   <li>End Time: {{time.endTime}}</li>
   <li>Total Time: {{time.totalTime}}</li>
-</ul>
+</ul> -->
