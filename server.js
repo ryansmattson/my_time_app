@@ -113,7 +113,14 @@ app.use('/*', function(req, res) {
 	res.sendFile(path.join(__dirname, './public/views/index.html'));
 });
 
-var server = app.listen(3000, function() {
-	var port = server.address().port;
-	console.log('Listening on port', port);
+var port = process.env.PORT || 3000;
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
 });
+
+//
+// var server = app.listen(3000, function() {
+// 	var port = server.address().port;
+// 	console.log('Listening on port', port);
+// });
