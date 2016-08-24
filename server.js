@@ -77,11 +77,7 @@ var checkAuth = function(req, res, next){
 	}
 };
 
-app.get('/logout', function(req, res){
-  req.logout();
-	// res.redirect('/');
-	res.sendFile(path.join(__dirname, './public/views/index.html'));
-});
+
 
 
 app.use('/', index);
@@ -92,6 +88,24 @@ app.use('/jobs', checkAuth, newjob);
 app.use('/times', checkAuth, times);
 app.use('/users', checkAuth, users);
 app.use('/invoices', checkAuth, invoices);
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+	// res.redirect('/');
+	res.sendFile(path.join(__dirname, './public/views/index.html'));
+});
+
+app.get('/allUsernames', function(req, res){
+	User.findAllUsernames(function(err, usernames){
+		if(err) {
+			console.log(err);
+			res.sendStatus(500);
+		} else {
+			res.send(usernames)
+		}
+	})
+})
 
 
 

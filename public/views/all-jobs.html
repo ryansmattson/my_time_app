@@ -24,7 +24,7 @@
                 <md-list-item class="md-3-line" ng-repeat="job in alljobs.allJobsList">
                     <div class="md-list-item-text" layout-padding>
                         <h3>{{job.name}}</h3>
-                        <h4>Date: {{job.dateCreatedPretty}}</h4>
+                        <h4>Created: {{job.dateCreatedPretty}}</h4>
                     </div>
                     <md-button class="md-secondary md-secondary md-primary md-hue-2" ng-click="alljobs.setAsCurrentJob(job.id)">Open</md-button>
                     <md-button class="md-secondary md-warn md-accent md-hue-2" ng-click="alljobs.deleteJob(job.id, $event)">Delete</md-button>

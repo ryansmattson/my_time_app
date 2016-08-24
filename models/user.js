@@ -32,6 +32,25 @@ function findByUsername(username, callback) {
 	});
 }
 
+function findAllUsernames(callback) {
+	pool.connect(function(err, client, done) {
+		if (err) {
+			done();
+			return callback(err);
+		}
+
+		client.query('SELECT username FROM users;',
+			function(err, result) {
+				if (err) {
+					done();
+					return callback(err);
+				}
+				callback(null, result.rows);
+				done();
+			});
+	});
+}
+
 
 function findAndComparePassword(username, candidatePassword, callback) {
 	//candidatePassword is what we received on the request
@@ -128,6 +147,7 @@ function updateUser(id, first_name, last_name, phone, email, address, hourly_rat
 
 module.exports = {
 	createUser: createUser,
+	findAllUsernames: findAllUsernames,
   findAndComparePassword: findAndComparePassword,
   findById: findById,
   findByUsername:findByUsername,

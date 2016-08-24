@@ -5,10 +5,10 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	var vm = this;
 
 	vm.currentTab = RouteFactory.currentTab;
-
 	vm.currentUser = UserFactory.currentUser;
+	vm.allUsernames = UserFactory.allUsernames.usernames;
 
-	function updateCurrentUser(){
+	function updateCurrentUser() {
 		vm.currentUser = UserFactory.currentUser;
 	}
 
@@ -24,7 +24,7 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	vm.newJobRoute = function() {
 		RouteFactory.newJobRoute();
 	}
-	vm.profileRoute = function(){
+	vm.profileRoute = function() {
 		RouteFactory.profileRoute();
 	}
 	vm.homeRoute = function() {
@@ -33,26 +33,28 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	}
 
 
-//look at current user from user factory and make sure it's not null.
+	//look at current user from user factory and make sure it's not null.
 
 
-vm.logout = function(){
-	$http.get('/logout').then(handleLogoutSucess, handleLogoutFailure);
-}
-function handleLogoutSucess(res){
-	console.log('Logout successful:', res);
-	console.log('UserFactory.currentUser before reset: ', UserFactory.currentUser);
-	UserFactory.currentUser = {};
-	// vm.currentUser = UserFactory.currentUser;
-	updateCurrentUser()
+	vm.logout = function() {
+		$http.get('/logout').then(handleLogoutSucess, handleLogoutFailure);
+	}
 
-	RouteFactory.homeRoute();
-	console.log('UserFactory.currentUser after reset: ', UserFactory.currentUser);
-	console.log('vm.currentUser after reset: ', vm.currentUser);
-}
-function handleLogoutFailure(res){
-	console.log('Logout unsuccessful:', res);
-}
+	function handleLogoutSucess(res) {
+		console.log('Logout successful:', res);
+		console.log('UserFactory.currentUser before reset: ', UserFactory.currentUser);
+		UserFactory.currentUser = {};
+		// vm.currentUser = UserFactory.currentUser;
+		updateCurrentUser()
+
+		RouteFactory.homeRoute();
+		console.log('UserFactory.currentUser after reset: ', UserFactory.currentUser);
+		console.log('vm.currentUser after reset: ', vm.currentUser);
+	}
+
+	function handleLogoutFailure(res) {
+		console.log('Logout unsuccessful:', res);
+	}
 
 
 	//   **LOGIN**
@@ -120,19 +122,66 @@ function handleLogoutFailure(res){
 	};
 
 
-	vm.registerSubmit = function(first, last, username, password, email, phone, address, rate) {
-		var sendData = {};
+	vm.registerSubmit = function(first, last, username, password, confirmPassword, email, phone, address, rate, ev) {
+		var usernameIsTaken = false;
 
-		sendData.first_name = first;
-		sendData.last_name = last;
-		sendData.username = username;
-		sendData.password = password;
-		sendData.email = email;
-		sendData.phone = phone;
-		sendData.address = address;
-		sendData.hourly_rate = rate;
+		for (var i = 0; i < vm.allUsernames.length; i++) {
+			if (usernameIsTaken == true) {
+				//do nothing
+			} else {
+				if (username == vm.allUsernames[i].username) {
+					usernameIsTaken = true;
+				}
+			}
+		}
 
-		$http.post('/register', sendData).then(handleRegisterSuccess, handleRegisterFailure);
+		if (!username || !password || !confirmPassword) {
+			$mdDialog.show(
+				$mdDialog.alert()
+				.parent(angular.element(document.querySelector('#popupContainer')))
+				.clickOutsideToClose(true)
+				.title('Attention')
+				.textContent('Please fill in all required fields.')
+				.ariaLabel('Fill in all required fields')
+				.ok('Close')
+				.targetEvent(ev)
+			);
+		} else if (usernameIsTaken) {
+			$mdDialog.show(
+				$mdDialog.alert()
+				.parent(angular.element(document.querySelector('#popupContainer')))
+				.clickOutsideToClose(true)
+				.title('Attention')
+				.textContent('Username is taken, please try another.')
+				.ariaLabel('Username is taken')
+				.ok('Close')
+				.targetEvent(ev)
+			);
+		} else if (password !== confirmPassword) {
+			$mdDialog.show(
+				$mdDialog.alert()
+				.parent(angular.element(document.querySelector('#popupContainer')))
+				.clickOutsideToClose(true)
+				.title('Attention')
+				.textContent('Passwords do not match.')
+				.ariaLabel('Passwords do not match.')
+				.ok('Close')
+				.targetEvent(ev)
+			);
+		} else {
+			var sendData = {};
+
+			sendData.first_name = first;
+			sendData.last_name = last;
+			sendData.username = username;
+			sendData.password = password;
+			sendData.email = email;
+			sendData.phone = phone;
+			sendData.address = address;
+			sendData.hourly_rate = rate;
+
+			$http.post('/register', sendData).then(handleRegisterSuccess, handleRegisterFailure);
+		}
 	}
 
 	function handleRegisterSuccess(res) {

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "solo project for Prime",
   "main": "server.js",
+  "engines": {
+    "node": "6.2.2",
+    "npm": "3.9.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

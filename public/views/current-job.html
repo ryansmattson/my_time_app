@@ -11,9 +11,9 @@
                     <md-list-item class="md-3-line" layout="column">
                         <div layout-padding class="md-list-item-text" layout="column">
                             <!-- <h3>Job: {{current.currentJob.name}}</h3> -->
-                            <h3>Date Created: {{current.currentJob.date_createdPretty}}</h3>
-                            <h3>Rate: ${{current.currentJob.hourly_rate}}</h3>
-                            <h3>Total Time: {{current.totalJobTime.pretty}}</h3>
+                            <h3>Date Created: <span class="lightgray">{{current.currentJob.date_createdPretty}}</span></h3>
+                            <h3>Rate: <span class="lightgray">${{current.currentJob.hourly_rate}}</span></h3>
+                            <h3>Total Time: <span class="lightgray">{{current.totalJobTime.pretty}}</span></h3>
                         </div>
                     </md-list-item>
                     <md-button class="button invoice-button md-raised" flex="30" ng-click="current.newInvoiceRoute()">+invoice</md-button>
