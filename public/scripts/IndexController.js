@@ -186,6 +186,10 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 
 	function handleRegisterSuccess(res) {
 		console.log('Successful posting of user info', res);
+		UserFactory.getCurrentUser();
+		JobFactory.getCurrentJob();
+		RouteFactory.homeRoute();
+		updateCurrentUser()
 	}
 
 	function handleRegisterFailure(res) {

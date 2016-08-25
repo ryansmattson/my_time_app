@@ -1,5 +1,4 @@
 // var pg = require('pg');
-// var bcrypt = require('bcrypt');
 //
 //
 // var config = {
@@ -12,6 +11,7 @@
 
 var pg = require('pg');
 var url = require('url');
+var bcrypt = require('bcrypt');
 
 var config={};
 

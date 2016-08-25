@@ -117,7 +117,7 @@ app.use('/*', function(req, res) {
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
+    console.log('Listening on port:', port);
 });
 
 //
