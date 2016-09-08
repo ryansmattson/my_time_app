@@ -53,24 +53,6 @@ angular.module('myTimeApp').controller('InvoicesController', ['$http', '$locatio
 		console.log('Failure!', res);
 	}
 
-	//
-	// vm.setAsCurrentJob = function(job_id) {
-	// 	var sendData = {};
-	// 	sendData.job_id = job_id;
-	// 	$http.put('/jobs/changeCurrentJob', sendData).then(handleSetAsCurrentSucces, handleSetAsCurrentFailure);
-	// }
-	//
-	// function handleSetAsCurrentSucces(res) {
-	// 	console.log('Successfully set as current job', res);
-	// 	// JobFactory.getCurrentJob();
-	// 	// TimesFactory.getAllTimes();
-	//   RouteFactory.currentJobRoute();
-	// }
-	//
-	// function handleSetAsCurrentFailure(res) {
-	// 	console.log('Failure', res);
-	// }
-	//
 
 
 	getAllInvoices();

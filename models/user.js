@@ -172,8 +172,6 @@ function updateUser(id, first_name, last_name, phone, email, address, hourly_rat
 
 
 
-
-
 module.exports = {
 	createUser: createUser,
 	findAllUsernames: findAllUsernames,

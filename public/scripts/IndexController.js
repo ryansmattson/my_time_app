@@ -33,25 +33,16 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	}
 
 
-	//look at current user from user factory and make sure it's not null.
-
 
 	vm.logout = function() {
 		$http.get('/logout').then(handleLogoutSucess, handleLogoutFailure);
 	}
 
 	function handleLogoutSucess(res) {
-		console.log('Logout successful:', res);
-		console.log('UserFactory.currentUser before reset: ', UserFactory.currentUser);
 		UserFactory.currentUser = {};
-		// vm.currentUser = UserFactory.currentUser;
 		updateCurrentUser()
-
 		RouteFactory.homeRoute();
-		console.log('UserFactory.currentUser after reset: ', UserFactory.currentUser);
-		console.log('vm.currentUser after reset: ', vm.currentUser);
 	}
-
 	function handleLogoutFailure(res) {
 		console.log('Logout unsuccessful:', res);
 	}
@@ -85,6 +76,7 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 	}
 
 
+	//Login Modal
 	vm.showLogin = function() {
 		$mdDialog.show({
 			templateUrl: '/views/login.html',
@@ -99,6 +91,7 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 		}
 	}
 
+	//Failed Login Modal
 	vm.showFailedLogin = function() {
 		$mdDialog.show({
 			templateUrl: '/views/login-fail.html',
@@ -115,13 +108,12 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 
 
 	//   **REGISTER**
-
 	vm.register = function() {
-		// $location.path('/register');
 		RouteFactory.registerRoute();
 	};
 
 
+	//Logic to handle submitting on login.  Required fields, password matching, unused username.
 	vm.registerSubmit = function(first, last, username, password, confirmPassword, email, phone, address, rate, ev) {
 		var usernameIsTaken = false;
 
@@ -196,6 +188,6 @@ angular.module('myTimeApp').controller('IndexController', ['$http', '$location',
 		console.log('Failure posting of user info', res);
 	}
 
-	updateCurrentUser()
 
+	updateCurrentUser()
 }]);

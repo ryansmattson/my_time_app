@@ -87,7 +87,7 @@
             </form>
             <div layout="row" layout-align="end">
                 <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.createNewInvoice(newinvoice.invoice); newinvoice.invoicesRoute()">Save</md-button>
-                <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.saveAndPrintInvoice(newinvoice.invoice)">Print</md-button>
+                <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.saveAndPrintInvoice(newinvoice.invoice); newinvoice.print()">Print</md-button>
                 <md-button layout-align="center end" class="button md-raised" ng-click="newinvoice.currentJobRoute()">Cancel</md-button>
             </div>
         </md-content>

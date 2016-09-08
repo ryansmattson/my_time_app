@@ -3,29 +3,8 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 	var vm = this;
 
 	vm.invoice = {};
-
-
 	vm.totalJobBalance;
 	vm.finalRate;
-	// vm.editableField = {
-	// 	invoice: false,
-	// 	description: false,
-	// 	invoiceDate: false,
-	// 	dueDate: false,
-	// 	from: false,
-	// 	address: false,
-	// 	phone: false,
-	// 	email: false,
-	// 	billTo: false,
-	// 	invoiceTo: false,
-	// 	hours: false,
-	// 	rate: false,
-	// 	balanceDue: false,
-	// 	notes: false,
-	// 	terms: false
-	// }
-
-
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
 	// id
 	// jobId
@@ -103,26 +82,13 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 
 	vm.turnOnEditField = function(fieldName) {
 		vm.editableField[fieldName] = false;
-
-		console.log('editFieldOn field:', fieldName);
 	}
 
 	vm.submitEditField = function(fieldName, input) {
 		vm.editableField[fieldName] = true;
 		vm.invoice[fieldName] = input;
-		console.log('editFieldOff fieldName:', fieldName);
-		console.log('editFieldOff input:', input);
-		console.log('editableField:', vm.editableField);
 	}
 
-	// vm.turnOffAllEditFields = function() {
-	// 	console.log('turnOffAllEditFields');
-	// 	for (field in vm.editableField) {
-	// 		if (field == true) {
-	// 			field = false;
-	// 		}
-	// 	}
-	// }
 
 	function calcFinalRate() {
 		if (vm.currentJob.hourly_rate !== null) {
@@ -140,6 +106,10 @@ angular.module('myTimeApp').controller('NewInvoiceController', ['$http', '$locat
 
 		vm.totalJobBalance = parseFloat(total);
 		console.log(vm.totalJobBalance);
+	}
+
+	vm.print = function(){
+		print();
 	}
 
 

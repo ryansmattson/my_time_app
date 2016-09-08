@@ -14,8 +14,6 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 		}
 	}
 
-
-
 	//Calculates how much time has elapsed between 2 date/times.
 	function calcElapsedTime(clockIn, clockOut) {
 		clockIn = new Date(clockIn);
@@ -23,7 +21,6 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 
 		return (clockOut - clockIn);
 	}
-
 
 	//Changes 24 hour clock format to 12 hour clock format.
 	function format24HourClock(hours) {
@@ -36,19 +33,12 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 		}
 	}
 
-
 	// mm/dd/yyyy
 	function formatForDate(dateStamp) {
 		dateStamp = new Date(dateStamp);
-		// console.log('dateStamp:', dateStamp);
 		var year = dateStamp.getFullYear();
 		var month = dateStamp.getMonth() + 1; //getMonth is zero indexed
 		var day = dateStamp.getDate();
-		//
-		// console.log('year:', year);
-		// console.log('month:', month);
-		// console.log('day:', day);
-
 		var tempDate = month + '/' + day + '/' + year;
 
 		return tempDate;
@@ -94,15 +84,12 @@ angular.module('myTimeApp').factory('DateTimeFactory', function($location) {
 		return hours + ":" + minutes + ":" + seconds;
 	}
 
-
 	function msToHours(duration){
 		var seconds = duration / 1000;
 		var minutes = seconds / 60;
 		var hours = (minutes / 60).toFixed(2);
 		return parseFloat(hours);
 	}
-
-
 
 
 	return {

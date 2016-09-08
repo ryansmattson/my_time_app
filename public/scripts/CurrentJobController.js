@@ -8,11 +8,9 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	vm.currentJobTimes = TimesFactory.currentJobTimes;
 	vm.currentJob = JobFactory.currentJob;
 	vm.totalJobTime = TimesFactory.totalJobTime;
-
 	vm.seconds = '00';
 	vm.minutes = '00';
 	vm.hours = '00';
-
 	vm.allTimes = [];
 
 	var intervalId;
@@ -20,10 +18,10 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 	var clockIn;
 	var clockOut;
 
+
 	vm.newInvoiceRoute = function() {
 		RouteFactory.newInvoiceRoute();
 	}
-
 
 	vm.deleteTime = function(id, ev){
 		// Appending dialog to document.body to cover sidenav in docs app
@@ -79,7 +77,7 @@ angular.module('myTimeApp').controller('CurrentJobController', ['$http', '$locat
 
 
 
-//Starts timer on "Clock In" button click and updates the database with setClockIn()
+	//Starts timer on "Clock In" button click and updates the database with setClockIn()
 	vm.startTimer = function(job_id) {
 		if (isTimerRunning) {
 			return

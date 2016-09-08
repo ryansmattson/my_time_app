@@ -4,6 +4,8 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 
 	vm.allJobsList = {};
 
+
+	//query the database to retrieve all jobs
 	function getAllJobs() {
 		$http.get('/jobs/allJobs').then(handleGetJobsSuccess, handleGetJobsFailure);
 	}
@@ -20,13 +22,13 @@ angular.module('myTimeApp').controller('AllJobsController', ['$http', '$location
 	}
 
 
+	//sets the selected job as the current job
 	vm.setAsCurrentJob = function(job_id){
 		JobFactory.setAsCurrentJob(job_id);
 	}
 
 
 	vm.deleteJob = function(id, ev){
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm =
 			$mdDialog.confirm()
 			.title('Are you sure you want to delete this job?')

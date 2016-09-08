@@ -2,9 +2,6 @@ angular.module('myTimeApp').factory('JobFactory', function($location, $http, Tim
 
 	var currentJob = {};
 
-  // var totalJobBalance = TimesFactory.totalJobBalance;
-
-
 	//Retrieves the current job and all its details and adds them to the currentJob object.
 	function getCurrentJob() {
 		$http.get('/jobs/currentJob').then(handleGetCurrentSuccess, handleGetCurrentFailure);
@@ -64,8 +61,6 @@ angular.module('myTimeApp').factory('JobFactory', function($location, $http, Tim
 	function handleDeleteFailure(res){
 		console.log('Could not delete job:', res);
 	}
-
-
 
 
 	return {

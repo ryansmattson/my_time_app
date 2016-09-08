@@ -44,12 +44,8 @@ angular.module('myTimeApp').factory('TimesFactory', function($location, $http, D
 
 	function handleGetAllTimesSuccess(res) {
 		var timesData = res.data;
-		// var rate = userOrJobRate();
-
+		
 		buildCurrentTimesObject(timesData);
-
-		// totalJobBalance.total = calcTotalJobBalance(totalJobTime.hours, rate);
-		// console.log('totalJobBalance.total:', totalJobBalance.total);
 	}
 
 	function handleGetAllTimesFailure(res) {

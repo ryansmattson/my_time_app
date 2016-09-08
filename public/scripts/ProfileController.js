@@ -4,6 +4,10 @@ angular.module('myTimeApp').controller('ProfileController', ['$http', '$location
 
 	vm.currentUser = UserFactory.currentUser;
 
+	vm.currentJobRoute = function(){
+		RouteFactory.currentJobRoute();
+	}
+
 	vm.updateUser = function(id, first_name, last_name, phone, email, address, hourly_rate){
 		var sendData = {};
 
@@ -22,12 +26,6 @@ angular.module('myTimeApp').controller('ProfileController', ['$http', '$location
 	}
 	function handleUpdateUserFailure(res){
 		console.log('Failed to update user:', res);
-	}
-
-
-
-	vm.currentJobRoute = function(){
-		RouteFactory.currentJobRoute();
 	}
 
 }]);

@@ -74,6 +74,5 @@ angular.module('myTimeApp').config(['$routeProvider', '$locationProvider', '$mdT
   })
 
 
-
   $locationProvider.html5Mode(true);
 }]);

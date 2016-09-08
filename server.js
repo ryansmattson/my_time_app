@@ -16,33 +16,6 @@ var path = require('path');
 
 var app = express();
 
-
-var pg = require('pg');
-var url = require('url');
-
-var config={};
-
-if(process.env.DATABASE_URL != undefined) {
- // connectionString = process.env.DATABASE_URL + "?ssl=true";
- var params = url.parse(process.env.DATABASE_URL);
- var auth = params.auth ? params.auth.split(':') : [null, null];
-   config = {
-   user: auth[0],
-   password: auth[1],
-   host: params.hostname,
-   port: params.port,
-   database: params.pathname.split('/')[1],
-   ssl: process.env.SSL
- };
-} else {
- config = {
-   database: 'mytime',
-   port: 5432,
-   max: 10,
-   idleTimeoutMillis: 30000
- };
-}
-
 //Configures the session after user has logged in.
 app.use(session({
 	secret: 'secret',
